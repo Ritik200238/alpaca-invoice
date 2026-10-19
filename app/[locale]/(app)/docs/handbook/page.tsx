@@ -20,19 +20,19 @@ const steps = [
     icon: Wallet,
     title: '1. Connect Your Wallet',
     description:
-      'Install the Leo Wallet or Puzzle Wallet browser extension. Click "Connect Wallet" in the top-right corner and approve the connection request.',
+      'Install a wallet browser extension. Click "Connect Wallet" in the top-right corner and approve the connection request.',
   },
   {
     icon: FilePlus,
     title: '2. Create an Invoice',
     description:
-      'Navigate to "Create Invoice" from the sidebar. Fill in the buyer\'s Aleo address, amount in credits, description, and due date, then submit. A zero-knowledge proof will be generated automatically.',
+      'Navigate to "Create Invoice" from the sidebar. Fill in the buyer\'s address, amount in credits, description, and due date, then submit. A zero-knowledge proof will be generated automatically.',
   },
   {
     icon: CreditCard,
     title: '3. Pay an Invoice',
     description:
-      'Open a received invoice from the "Invoices" page. Review details and click "Pay". Payment is a single-step private payment via zk_invoice_v3_1.aleo/pay_invoice_credits_private (credits transfer + invoice state + settlement commitment), generating a PaymentRecord for both parties.',
+      'Open a received invoice from the "Invoices" page. Review details and click "Pay". Payment is a single private step: a shielded coin moves to the seller inside the transaction that marks the invoice paid, and a settlement commitment is recorded.',
   },
   {
     icon: ShieldCheck,
@@ -53,25 +53,25 @@ const faqs = [
     icon: Lock,
     question: 'How is my data kept private?',
     answer:
-      'All invoice data is encrypted client-side using AES-GCM with a master key derived from your wallet signature. On-chain records use Aleo\'s zero-knowledge proofs, so transaction details are never publicly visible.',
+      'All invoice data is encrypted client-side using AES-GCM with a master key derived from your wallet signature. On-chain, the contract holds only commitments and checks zero-knowledge proofs, so invoice details are never publicly visible.',
   },
   {
     icon: Globe,
     question: 'Which network does this run on?',
     answer:
-      'Aleo Testnet only. Current program: zk_invoice_v3_1.aleo (tx at1kf9tl2vmd84398qrpzdrmtfkw2jdt4revyjlv2hmv5efg6rnegzqp3a0yp). Testnet credits have no real monetary value.',
+      'Midnight Preview, a public test network. Contract 15efb99ca21bb255b0f12a1de56c0519d3f98e95c4e1e4f341aea8fa0f4ec2a8. Test tokens have no real monetary value.',
   },
   {
     icon: Monitor,
     question: 'Which browsers are supported?',
     answer:
-      'Any modern browser that supports the Leo Wallet or Puzzle Wallet extension. Chrome and Brave are recommended for the best experience.',
+      'Any modern browser that supports a wallet extension. Chrome and Brave are recommended.',
   },
   {
     icon: Wallet,
     question: 'Which wallets are supported?',
     answer:
-      'Leo Wallet and Puzzle Wallet are both supported. Make sure your wallet extension is installed and connected to the Aleo Testnet.',
+      'Wallet support is moving to Lace, the Midnight wallet. Until that lands, the interface is not connected to the Midnight contract.',
   },
   {
     icon: AlertTriangle,
@@ -110,7 +110,7 @@ export default function HandbookPage() {
       <div className="surface-card p-6 md:p-8">
         <h2 className="mb-1 text-lg font-semibold text-primary-900">Quick Start Guide</h2>
         <p className="mb-6 text-sm text-primary-500">
-          Follow these steps to start using Alpaca Invoice
+          Follow these steps to start using Inkan
         </p>
 
         <div className="space-y-5">

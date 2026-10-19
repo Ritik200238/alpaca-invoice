@@ -31,8 +31,8 @@ import { InvoiceStatus } from '@/lib/types';
 const MOCK_RECEIPT_BUYER = {
   paymentId: 'pay_0x7f3a2b1c_field' as any,
   invoiceId: 'inv_0xpaydemo1a2b3c_field' as any,
-  payer: 'aleo1buyer1234567890abcdefghijklmnopqrstuvwxyz1234567890ab' as any,
-  payee: 'aleo1seller1234567890abcdefghijklmnopqrstuvwxyz1234567890abc' as any,
+  payer: 'buyer-key-7f3a…' as any,
+  payee: 'seller-key-2c91…' as any,
   amount: BigInt(1_250_000_000),
   paidAt: new Date(),
 };
@@ -40,8 +40,8 @@ const MOCK_RECEIPT_BUYER = {
 const MOCK_RECEIPT_SELLER = {
   paymentId: 'pay_0x7f3a2b1c_field' as any,
   invoiceId: 'inv_0xpaydemo1a2b3c_field' as any,
-  payer: 'aleo1buyer1234567890abcdefghijklmnopqrstuvwxyz1234567890ab' as any,
-  payee: 'aleo1seller1234567890abcdefghijklmnopqrstuvwxyz1234567890abc' as any,
+  payer: 'buyer-key-7f3a…' as any,
+  payee: 'seller-key-2c91…' as any,
   amount: BigInt(1_250_000_000),
   paidAt: new Date(),
 };
@@ -50,8 +50,8 @@ const MOCK_RECEIPT_SELLER = {
 const MOCK_INVOICES_HERO: Invoice[] = [
   {
     id: 'inv_0x1a2b3c4d5e6f' as any,
-    seller: 'aleo1seller1234567890abcdefghijklmnopqrstuvwxyz1234567890abc',
-    buyer: 'aleo1buyer1234567890abcdefghijklmnopqrstuvwxyz1234567890ab',
+    seller: 'seller-key-2c91…',
+    buyer: 'buyer-key-7f3a…',
     amount: BigInt(500_000_000),
     invoiceHash: '0xhash1a2b3c4d5e' as any,
     dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
@@ -60,8 +60,8 @@ const MOCK_INVOICES_HERO: Invoice[] = [
   },
   {
     id: 'inv_0x7f8e9d0c1b2a' as any,
-    seller: 'aleo1seller9876543210zyxwvutsrqponmlkjihgfedcba9876543210',
-    buyer: 'aleo1buyer9876543210zyxwvutsrqponmlkjihgfedcba9876543210',
+    seller: 'seller-key-…',
+    buyer: 'buyer-key-…',
     amount: BigInt(1_250_000_000),
     invoiceHash: '0xhash7f8e9d0c1b' as any,
     dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
@@ -70,8 +70,8 @@ const MOCK_INVOICES_HERO: Invoice[] = [
   },
   {
     id: 'inv_0x3d4e5f6a7b8c' as any,
-    seller: 'aleo1sellerabcdef1234567890ghijklmnopqrstuvwxyz12345678',
-    buyer: 'aleo1buyerabcdef1234567890ghijklmnopqrstuvwxyz12345678',
+    seller: 'seller-key-…',
+    buyer: 'buyer-key-…',
     amount: BigInt(750_000_000),
     invoiceHash: '0xhash3d4e5f6a7b' as any,
     dueDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
@@ -83,8 +83,8 @@ const MOCK_INVOICES_HERO: Invoice[] = [
 /** Single mock invoice for How section step 2 (buyer pays) */
 const MOCK_INVOICE_PAY: Invoice = {
   id: 'inv_0xpaydemo1a2b3c' as any,
-  seller: 'aleo1seller1234567890abcdefghijklmnopqrstuvwxyz1234567890abc',
-  buyer: 'aleo1buyer1234567890abcdefghijklmnopqrstuvwxyz1234567890ab',
+  seller: 'seller-key-2c91…',
+  buyer: 'buyer-key-7f3a…',
   amount: BigInt(1_250_000_000),
   invoiceHash: '0xhashpaydemo12' as any,
   dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
@@ -106,7 +106,7 @@ export default function LandingPage() {
   const steps = [
     {
       icon: <FileText className="h-8 w-8 text-accent-500" />,
-      title: '1. Issue ZK-Invoice',
+      title: '1. Issue Inkan',
       description:
         'Seller generates a private InvoiceRecord. Details like amount and buyer address are encrypted on-chain, visible only to authorized parties.',
       tag: 'transition create_invoice',
@@ -115,7 +115,7 @@ export default function LandingPage() {
       icon: <Cpu className="h-8 w-8 text-primary-400" />,
       title: '2. Private Settlement',
       description:
-        'Buyer settles using Aleo credits. The payment receipt is cryptographically linked to the invoice, updating status to PAID privately.',
+        'Buyer settles using credits. The payment receipt is cryptographically linked to the invoice, updating status to PAID privately.',
       tag: 'transition pay_invoice_credits_private',
     },
     {
@@ -143,14 +143,14 @@ export default function LandingPage() {
             <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-xl shadow-lg shadow-accent-900/20">
               <Image
                 src="/images/mascot/mascot-celebrating.png"
-                alt="ZK-Invoice mascot"
+                alt="Inkan mascot"
                 fill
                 className="object-contain"
                 sizes="40px"
               />
             </div>
             <span className="bg-gradient-to-r from-white to-primary-400 bg-clip-text text-xl font-bold tracking-tight text-transparent">
-              ZK-Invoice
+              Inkan
             </span>
           </div>
           <div className="hidden space-x-8 text-sm font-medium text-primary-400 md:flex">
@@ -193,7 +193,7 @@ export default function LandingPage() {
                 <div className="inline-flex items-center space-x-2 rounded-full border border-accent-500/20 bg-accent-500/10 px-3 py-1 sm:px-4 sm:py-1.5 animate-shiny">
                   <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-accent-400 flex-shrink-0" />
                   <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.15em] text-accent-400">
-                    {t('landing.hero.poweredByAleo')}
+                    {t('landing.hero.poweredByZk')}
                   </span>
                 </div>
                 <div className="inline-flex items-center space-x-2 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1 sm:px-4 sm:py-1.5">
@@ -467,7 +467,7 @@ export default function LandingPage() {
                     {t('landing.features.publicChains')}
                   </th>
                   <th className="px-6 md:px-10 py-8 md:py-10 font-black italic uppercase tracking-widest text-accent-400 text-xs md:text-sm relative">
-                    {t('landing.features.zkInvoiceAleo')}
+                    {t('landing.features.productColumn')}
                     <div className="absolute inset-0 border-x border-accent-500/20 bg-accent-500/5 -z-10" />
                   </th>
                 </tr>
@@ -532,13 +532,13 @@ export default function LandingPage() {
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-primary-400">{t('landing.howItWorks.seller')}</label>
                   <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-mono text-xs text-primary-200">
-                    aleo1seller...90abc
+                    seller-key-2c91…
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-primary-400">{t('landing.howItWorks.buyer')}</label>
                   <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-mono text-xs text-primary-200">
-                    aleo1buyer...90ab
+                    buyer-key-7f3a…
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
@@ -727,13 +727,13 @@ export default function LandingPage() {
           <div className="relative h-10 w-10 flex-shrink-0 opacity-80">
             <Image
               src="/images/mascot/mascot-celebrating.png"
-              alt="ZK-Invoice mascot"
+              alt="Inkan mascot"
               fill
               className="object-contain"
               sizes="40px"
             />
           </div>
-          <span className="text-2xl font-black tracking-tighter text-primary-400">ZK-Invoice</span>
+          <span className="text-2xl font-black tracking-tighter text-primary-400">Inkan</span>
         </div>
         <p>{t('landing.footer.tagline')}</p>
       </footer>

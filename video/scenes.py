@@ -1,4 +1,4 @@
-"""The scenes of the Alpaca Invoice demo video.
+"""The scenes of the Inkan demo video.
 
 SPDX-License-Identifier: Apache-2.0
 
@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 EVIDENCE = ROOT / "evidence"
 RECEIPTS = REPO / "docs" / "receipts" / "preview.json"
-REPO_URL = "github.com/Ritik200238/alpaca-invoice"
+REPO_URL = "github.com/Ritik200238/inkan"
 
 
 def need(path: Path) -> str:
@@ -78,14 +78,14 @@ def scenes() -> list[dict]:
 
     # 1 ------------------------------------------------------------------
     sub = (
-        "Ported from Aleo to Midnight. Four circuits, tested in process and deployed to Preview."
+        "Built on Midnight. Four circuits, tested in process and deployed to Preview."
         if onchain
-        else "Ported from Aleo to Midnight. The first four circuits, tested in process."
+        else "Built on Midnight. Four circuits, tested in process."
     )
     t1 = "<div class='kicker'>Midnight Buildathon &middot; Wave 2</div><h1>Invoices settle on-chain.<br>Their terms never do.</h1>"
     out.append({"id": "title", "label": "Wave 2", "states": [
-        {"body": t1, "say": "Alpaca Invoice is private invoicing for businesses. The invoice settles on a public chain, but its terms never appear on it."},
-        {"body": t1 + f"<div class='rule'></div><p class='lead'>{e(sub)}</p>", "say": "This video shows the first part of the port from Aleo to Midnight, and the evidence behind it."},
+        {"body": t1, "say": "Inkan is private invoicing for businesses. The invoice settles on a public chain, but its terms never appear on it."},
+        {"body": t1 + f"<div class='rule'></div><p class='lead'>{e(sub)}</p>", "say": "This video shows what is built on Midnight so far, and the evidence behind it."},
     ]})
 
     # 2 ------------------------------------------------------------------
@@ -116,7 +116,7 @@ def scenes() -> list[dict]:
     h3 = head("What the chain sees", "Hidden by default. Provable on demand.")
     both = f"<div class='cards' style='--cols:2'>{card('On the ledger', pub, 'var(--blue)')}{card('Stays private', prv, 'var(--accent)')}</div>"
     out.append({"id": "privacy", "label": "Private by construction", "states": [
-        {"body": h3, "say": "Alpaca keeps the terms of every invoice off the chain, and keeps the proof on it."},
+        {"body": h3, "say": "Inkan keeps the terms of every invoice off the chain, and keeps the proof on it."},
         {"body": h3 + both, "say": "The ledger holds an identifier, a status, commitments and pseudonymous keys. The amounts, the tax, the due date and the payout addresses stay with the parties."},
         {"body": h3 + both + "<p class='lead' style='margin-top:30px;font-size:32px'>Tests assert that none of the private figures reaches public state.</p>",
          "say": "The test suite checks that none of those private figures ever appears in public state."},
@@ -131,7 +131,7 @@ def scenes() -> list[dict]:
     out.append({"id": "tax", "label": "Qualified invoices", "states": [
         {"body": h4, "say": "A qualified Japanese invoice carries two tax rates, and the contract checks them before it records anything."},
         {"body": h4 + rule, "say": "Each group must satisfy tax times ten thousand equals net times rate, and the two groups must add up to the invoice total."},
-        {"body": h4 + rule + "<p class='lead' style='margin-top:30px;font-size:32px'>Compact has no division, so the rule is a product. It is exact for every amount, where the Aleo version divided first.</p>",
+        {"body": h4 + rule + "<p class='lead' style='margin-top:30px;font-size:32px'>Compact has no division, so the rule is a product. It is exact for every amount.</p>",
          "say": "Compact has no division operator, so the rule is written as a product. That makes it exact for every amount."},
     ]})
 
@@ -192,17 +192,17 @@ def scenes() -> list[dict]:
         out.append({"id": "chain", "label": "Midnight Preview", "states": states7})
 
     # 8 ------------------------------------------------------------------
-    h8 = head("Where it stands", "A quarter of the port is built. The rest is next.")
+    h8 = head("Where it stands", "The core is built. The rest is next.")
     done = bullets(["<b>Built and tested:</b> create, pay, cancel, audit authorization.",
                     "<b>Next:</b> escrow, disputes, and a credit proof that counts only real settled invoices.",
                     "<b>Then:</b> the existing interface on Midnight, through the Lace wallet."])
     out.append({"id": "next", "label": "Roadmap", "states": [
-        {"body": h8, "say": "This is the first quarter of the port, and it is stated plainly."},
+        {"body": h8, "say": "This is the core of the product, and what comes next is stated plainly."},
         {"body": h8 + done, "say": "Create, pay, cancel and audit authorization are built and tested. Escrow, disputes and a credit proof come next, then the existing interface through the Lace wallet."},
     ]})
 
     # 9 ------------------------------------------------------------------
-    h9 = "<div class='kicker'>Alpaca Invoice on Midnight</div><h1>Private invoices.<br>Public proof.</h1>"
+    h9 = "<div class='kicker'>Inkan on Midnight</div><h1>Private invoices.<br>Public proof.</h1>"
     out.append({"id": "close", "label": "Open source", "states": [
         {"body": h9 + f"<div class='rule'></div><p class='lead'>{e(REPO_URL)} &middot; Apache-2.0</p>",
          "say": "The code, the tests and the receipts are open source under Apache two point zero."},

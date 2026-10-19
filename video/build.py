@@ -1,4 +1,4 @@
-"""Build the Alpaca Invoice demo video from scenes.json.
+"""Build the Inkan demo video from scenes.json.
 
 SPDX-License-Identifier: Apache-2.0
 
@@ -13,7 +13,7 @@ shows the heading, the second adds a line, and so on -- so a scene builds up on
 screen instead of appearing at once. Each state carries the sentence spoken while
 it is visible, and the same sentence is burned in as a caption.
 
-    python video/build.py            # builds docs/alpaca-midnight-demo.mp4
+    python video/build.py            # builds docs/inkan-demo.mp4
     python video/build.py --stills   # renders the pictures only
 
 Needs: Microsoft Edge, ffmpeg, ffprobe, `pip install edge-tts`.
@@ -33,7 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 WORK = ROOT / "work"
-OUT = REPO / "docs" / "alpaca-midnight-demo.mp4"
+OUT = REPO / "docs" / "inkan-demo.mp4"
 FONT = (ROOT / "fonts" / "InstrumentSans.ttf").resolve().as_uri()
 
 EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
@@ -97,7 +97,7 @@ def page(body: str, caption: str, label: str) -> str:
     cap = f'<div class="cap"><span>{html.escape(caption)}</span></div>' if caption else ""
     return (
         f"<!doctype html><meta charset='utf-8'><style>{CSS}</style><body><div class='grid'></div>"
-        f"<div class='brand'><b>Alpaca</b> Invoice on Midnight</div><div class='tag'>{html.escape(label)}</div>"
+        f"<div class='brand'><b>Inkan</b> on Midnight</div><div class='tag'>{html.escape(label)}</div>"
         f"<div class='frame'>{body}</div>{cap}</body>"
     )
 

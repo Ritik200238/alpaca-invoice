@@ -26,7 +26,7 @@ export const useEscrowStore = create<EscrowState>()(
       },
     }),
     {
-      name: 'alpaca-escrow-store',
+      name: 'inkan-escrow-store',
       partialize: (state) => ({ escrows: state.escrows }),
       storage: {
         getItem: (name) => {

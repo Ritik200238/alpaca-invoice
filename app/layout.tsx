@@ -6,7 +6,7 @@ import { Toaster } from 'sonner';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Alpaca Invoice',
+  title: 'Inkan',
   description: 'Privacy-preserving invoice and payment system built on Aleo',
 };
 

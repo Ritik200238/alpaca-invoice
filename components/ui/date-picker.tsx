@@ -62,10 +62,10 @@ export function DatePicker({
         <button
           type="button"
           className={cn(
-            'flex w-full items-center justify-between rounded-xl border-2 border-alpaca-300 bg-alpaca-50 px-4 py-3 text-sm transition-all duration-200 text-left',
+            'flex w-full items-center justify-between rounded-xl border-2 border-inkan-300 bg-inkan-50 px-4 py-3 text-sm transition-all duration-200 text-left',
             'focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20',
             'disabled:cursor-not-allowed disabled:opacity-50',
-            !selected && 'text-alpaca-400',
+            !selected && 'text-inkan-400',
             className
           )}
         >
@@ -78,7 +78,7 @@ export function DatePicker({
           align="start"
           sideOffset={4}
           className={cn(
-            'z-50 rounded-xl border-2 border-alpaca-200 bg-white p-3 shadow-lg',
+            'z-50 rounded-xl border-2 border-inkan-200 bg-white p-3 shadow-lg',
             'data-[state=open]:animate-in data-[state=closed]:animate-out',
             'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
             'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',

@@ -94,15 +94,14 @@ export default function Sidebar() {
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/10">
             <Image
               src="/images/mascot/mascot-shield.png"
-              alt="Alpaca logo"
+              alt="Inkan logo"
               width={28}
               height={28}
               className="object-contain"
             />
           </div>
           <div>
-            <span className="text-lg font-bold text-white">Alpaca</span>
-            <span className="text-lg font-light text-primary-400"> Invoice</span>
+            <span className="text-lg font-bold text-white">Inkan</span>
           </div>
         </NextLink>
 

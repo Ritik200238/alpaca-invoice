@@ -37,10 +37,10 @@ export default function Providers({ children }: Props) {
 
   const wallets = useMemo(
     () => [
-      new ShieldWalletAdapterPatched({ appName: 'ZK Invoice', network, programs }),
-      new PuzzleWalletAdapter({ appName: 'ZK Invoice' }),
-      new LeoWalletAdapter({ appName: 'ZK Invoice' }),
-      new FoxWalletAdapter({ appName: 'ZK Invoice' })
+      new ShieldWalletAdapterPatched({ appName: 'Inkan', network, programs }),
+      new PuzzleWalletAdapter({ appName: 'Inkan' }),
+      new LeoWalletAdapter({ appName: 'Inkan' }),
+      new FoxWalletAdapter({ appName: 'Inkan' })
     ],
     [network, programs]
   );

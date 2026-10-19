@@ -1,1 +1,0 @@
-{"program":"zk_invoice_v3_3.aleo","version":"0.3.3","description":"Wave 3.3: on-chain arbiter mapping + USDCx public-as-signer compatibility","license":"MIT","leo":"3.4.0","dependencies":[{"name":"credits.aleo","location":"network","path":null,"edition":null},{"name":"test_usdcx_stablecoin.aleo","location":"network","path":null,"edition":null}],"dev_dependencies":null}

@@ -32,7 +32,7 @@ export const useDisputeStore = create<DisputeState>()(
       },
     }),
     {
-      name: 'alpaca-dispute-store',
+      name: 'inkan-dispute-store',
       partialize: (state) => ({ disputes: state.disputes }),
       storage: {
         getItem: (name) => {

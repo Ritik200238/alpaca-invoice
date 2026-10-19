@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1",
-  "title": "Alpaca Invoice on Midnight Preview",
+  "title": "Inkan on Midnight Preview",
   "network": "preview",
   "startedAt": "2026-10-19T12:25:18.925Z",
   "updatedAt": "2026-10-19T13:00:22.243Z",
@@ -14,7 +14,7 @@
   "payer": "mn_addr_preview18qurz66lrx8935a2mes3qutsvvadksv0xcfjujrdwqqcgdy0kplqyrg4ln",
   "indexer": "https://indexer.preview.midnight.network/api/v4/graphql",
   "contract": {
-    "source": "contracts/midnight/alpaca-invoice/src/alpaca-invoice.compact",
+    "source": "contracts/midnight/inkan/src/inkan.compact",
     "language": "Compact 0.23",
     "toolchain": "0.31.1"
   },

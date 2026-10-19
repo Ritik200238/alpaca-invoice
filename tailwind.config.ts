@@ -121,7 +121,7 @@ const config: Config = {
 
         // Form-control set (inputs, selects, checkboxes). 300 is the control border and
         // meets 3:1 against the field fill; 400 is placeholder text at 4.7:1.
-        alpaca: {
+        inkan: {
           50: "#FBFCFD",
           100: "#F1F5F7",
           200: "#E1E8EC",

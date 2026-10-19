@@ -1,0 +1,656 @@
+// Inkan on Midnight .. private B2B invoicing with Japanese consumption
+// tax rules, shielded settlement and selective audit.
+//
+// SPDX-License-Identifier: Apache-2.0
+// Copyright (c) 2026 Inkan contributors
+//
+// Midnight has no private records owned by an address, so an invoice lives in
+// two places:
+//
+//   * the ledger holds hiding commitments and the public status of each invoice,
+//     keyed by an invoice identifier that is itself a commitment;
+//   * the parties' own machines hold the openings (the terms and their salts) and
+//     supply them to a circuit as witnesses.
+//
+// The ledger map names match the ones the application's read layer uses
+// (`invoiceStatus`, `invoiceRegistry`, and so on), so one thing has one name.
+//
+// WHAT IS PRIVATE
+// ---------------
+// Amount, tax, total, due date, currency, line-item and memo digests, order
+// reference, tax groups, registration number and both payout addresses live in
+// `InvoiceTerms`, which is witness data and never a circuit return value. The
+// ledger stores a commitment to the whole of it plus eleven per-field
+// commitments, which is what makes selective disclosure possible later.
+//
+// WHAT HAS NO EQUIVALENT, AND WHAT STANDS IN
+// ------------------------------------------
+// * Compact has no division, no modulo and no bitwise operators; arithmetic is
+//   add, subtract and multiply (`compact/reference/compact-reference.mdx`,
+//   "Binary arithmetic expressions"). The rule "tax = net * rate / 10000" is
+//   therefore stated as the equivalent product `tax * 10000 = net * rate`, which
+//   is exact for every input; dividing first would only agree with the true tax
+//   when the net is a multiple of 10000.
+// * The audit scope travels off chain as a u64 bitmask. A bitmask cannot be tested here, so
+//   the ledger holds a nine-slot Boolean vector in the same bit order and the
+//   application converts at the boundary.
+// * A caller cannot be identified by the address that signed. Identity is a
+//   hash of a 32-byte secret the user holds, never `ownPublicKey()`, which is a
+//   prover-claimed value (`compact/smart-contract-security.mdx`, "Do not use
+//   ownPublicKey() for verification of the caller").
+// * Every time taken from the caller (`currentTime`, `paidAt`) is a claim, because the language can compare against the block's clock
+//   but cannot read it. Each claim is bounded against the block so it can be
+//   neither in the future nor more than an hour stale.
+
+pragma language_version 0.23;
+
+import CompactStandardLibrary;
+
+// ---------------------------------------------------------------------------
+// Domain separation
+//
+// Every hash and commitment carries its own tag, so a digest made for one
+// purpose can never be replayed as another. The version suffix lets a future
+// revision change a derivation without colliding with values already on chain.
+// ---------------------------------------------------------------------------
+export circuit tagParty(): Bytes<32> { return pad(32, "alpaca:party:v1"); }
+export circuit tagInvoiceId(): Bytes<32> { return pad(32, "alpaca:invoice-id:v1"); }
+export circuit tagFieldRoot(): Bytes<32> { return pad(32, "alpaca:field-root:v1"); }
+export circuit tagFieldSalt(): Bytes<32> { return pad(32, "alpaca:field-salt:v1"); }
+export circuit tagJct(): Bytes<32> { return pad(32, "alpaca:jct-reg:v1"); }
+export circuit tagPayment(): Bytes<32> { return pad(32, "alpaca:payment:v1"); }
+
+// One tag per committed field. The tag keeps a value committed as `amount` from
+// ever verifying as `tax`, even when the two are numerically equal.
+export circuit tagFieldAmount(): Bytes<32> { return pad(32, "alpaca:f:amount:v1"); }
+export circuit tagFieldTax(): Bytes<32> { return pad(32, "alpaca:f:tax:v1"); }
+export circuit tagFieldDueDate(): Bytes<32> { return pad(32, "alpaca:f:due:v1"); }
+export circuit tagFieldBuyer(): Bytes<32> { return pad(32, "alpaca:f:buyer:v1"); }
+export circuit tagFieldSeller(): Bytes<32> { return pad(32, "alpaca:f:seller:v1"); }
+export circuit tagFieldCurrency(): Bytes<32> { return pad(32, "alpaca:f:currency:v1"); }
+export circuit tagFieldItems(): Bytes<32> { return pad(32, "alpaca:f:items:v1"); }
+export circuit tagFieldMemo(): Bytes<32> { return pad(32, "alpaca:f:memo:v1"); }
+export circuit tagFieldOrderId(): Bytes<32> { return pad(32, "alpaca:f:order:v1"); }
+export circuit tagFieldTaxTag(): Bytes<32> { return pad(32, "alpaca:f:tax-tag:v1"); }
+export circuit tagFieldJctReg(): Bytes<32> { return pad(32, "alpaca:f:jct-reg:v1"); }
+
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
+
+// The nine values are, in order, the application's invoice statuses, so the
+// application's `InvoiceStatus` enum maps one to one. `expired` is carried for
+// that reason; no circuit sets it.
+export enum InvoiceStatus {
+  pending,
+  paid,
+  cancelled,
+  expired,
+  disputed,
+  resolvedCancelled,
+  resolvedPaid,
+  escrowed,
+  refunded
+}
+
+// The currency flag: 0 is the native token, 1 the test stablecoin.
+export enum CurrencyFlag {
+  credits,
+  usdcx
+}
+
+// One consumption-tax rate slot. An unused slot has rate 0, net 0 and tax 0.
+export struct TaxGroup {
+  rateBps: Uint<64>,
+  netSum: Uint<64>,
+  taxSum: Uint<64>
+}
+
+// Two fixed slots: 10% standard and 8% reduced.
+export struct TaxGroups {
+  groupA: TaxGroup,
+  groupB: TaxGroup
+}
+
+// The private commercial terms. Witness data: never a circuit return value and
+// never written to the ledger.
+export struct InvoiceTerms {
+  amount: Uint<64>,
+  taxAmount: Uint<64>,
+  totalAmount: Uint<64>,
+  dueDate: Uint<64>,
+  orderId: Bytes<32>,
+  currency: Bytes<32>,
+  itemsHash: Bytes<32>,
+  memoHash: Bytes<32>,
+  // The next three feed rules R1, R3 and R4, which are recorded rather than
+  // enforced.
+  lineItemsSum: Uint<64>,
+  expectedTotal: Uint<64>,
+  taxRateBps: Uint<64>,
+  // True for a qualified (JCT) invoice. When false the tax groups are ignored
+  // and no tax tag is stored.
+  isJct: Boolean,
+  taxGroups: TaxGroups,
+  // The registration number ("T" number), zero when there is none.
+  jctNumber: Uint<64>,
+  currencyFlag: CurrencyFlag,
+  // Where each side is paid, as Zswap coin public keys. They are inside the
+  // committed terms so a payment cannot be redirected after issuance; nothing
+  // else could bind them.
+  sellerPayout: Bytes<32>,
+  buyerPayout: Bytes<32>
+}
+
+// The frame the terms commitment is taken over. Binding both party keys into it
+// means a commitment lifted from one invoice cannot be replayed onto another.
+export struct TermsFrame {
+  sellerKey: Bytes<32>,
+  buyerKey: Bytes<32>,
+  terms: InvoiceTerms
+}
+
+// Who the two sides of an invoice are, as pseudonymous keys. Acting on an
+// invoice means proving you hold the secret behind one of them.
+export struct Parties {
+  sellerKey: Bytes<32>,
+  buyerKey: Bytes<32>
+}
+
+// The eleven per-field commitments, in a fixed order.
+export struct FieldCommitments {
+  amount: Bytes<32>,
+  taxAmount: Bytes<32>,
+  dueDate: Bytes<32>,
+  buyer: Bytes<32>,
+  seller: Bytes<32>,
+  currency: Bytes<32>,
+  itemsHash: Bytes<32>,
+  memoHash: Bytes<32>,
+  orderId: Bytes<32>,
+  taxTag: Bytes<32>,
+  jctReg: Bytes<32>
+}
+
+// An auditor's permission to see specific fields of one invoice until a date.
+// `scopes` is the off-chain bitmask unpacked: slot 0 is bit 1 (amount) and slot 8 is
+// bit 9 (order id).
+export struct AuditAuthorization {
+  auditKeyHash: Bytes<32>,
+  scopes: Vector<9, Boolean>,
+  expiresAt: Uint<64>,
+  issuer: Bytes<32>
+}
+
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+
+// 10^15, a cap that keeps tax arithmetic far from overflow.
+export circuit MAX_INVOICE_AMOUNT(): Uint<64> { return 1000000000000000; }
+
+// How far a claimed timestamp may sit from the block that carries it.
+//
+// Compact can compare against the chain's clock but cannot read it
+// (`compact/standard-library/exports.md`: four comparisons, no accessor), so a
+// timestamp argument is always the caller's claim. Bounding the claim is what is
+// left. One hour: building a proof and waiting for a block is real time, and no
+// honest caller needs more.
+export circuit TIMESTAMP_WINDOW(): Uint<64> { return 3600; }
+
+// ---------------------------------------------------------------------------
+// Ledger
+//
+// Nothing here holds an amount, a due date or
+// a payout address.
+// ---------------------------------------------------------------------------
+
+// Immutable per-deployment salt, mixed into every party key so one secret gives
+// different identities on different deployments.
+export sealed ledger instanceSalt: Bytes<32>;
+
+export ledger invoiceRegistry: Map<Bytes<32>, Bytes<32>>;
+export ledger invoiceStatus: Map<Bytes<32>, InvoiceStatus>;
+export ledger invoiceParties: Map<Bytes<32>, Parties>;
+export ledger invoiceCount: Map<Bytes<32>, Uint<64>>;
+export ledger invoiceCommitment: Map<Bytes<32>, Bytes<32>>;
+export ledger invoiceFieldCommitments: Map<Bytes<32>, FieldCommitments>;
+export ledger invoiceRulesResult: Map<Bytes<32>, Bytes<32>>;
+export ledger invoiceTaxTag: Map<Bytes<32>, Bytes<32>>;
+export ledger invoiceJctReg: Map<Bytes<32>, Bytes<32>>;
+export ledger invoiceArbiter: Map<Bytes<32>, Bytes<32>>;
+export ledger auditAuthorization: Map<Bytes<32>, AuditAuthorization>;
+export ledger auditCounter: Map<Bytes<32>, Uint<64>>;
+// settlement anchor => invoice id, so an auditor can walk from a payment
+// receipt back to the invoice it settled.
+export ledger paymentCommitments: Map<Bytes<32>, Bytes<32>>;
+
+// ---------------------------------------------------------------------------
+// Witnesses .. supplied by the local wallet, never transmitted.
+// ---------------------------------------------------------------------------
+
+// The user's root secret. Every identity this contract recognises is a
+// domain-separated hash of it.
+witness localSecret(): Bytes<32>;
+
+// The private terms of the invoice being acted on.
+witness invoiceTerms(): InvoiceTerms;
+
+// Opening for the invoice identifier and the terms commitment. Fresh, 32 bytes:
+// the hiding property rests on it.
+witness invoiceNonce(): Bytes<32>;
+
+// Opening for the payment anchor.
+witness settlementSalt(): Bytes<32>;
+
+constructor(salt: Bytes<32>) {
+  // A zero salt would collapse this deployment's party keys onto any other
+  // zero-salted deployment. The field is sealed, so a mistake would be permanent.
+  assert(disclose(salt) != default<Bytes<32>>, "alpaca: instance salt must be non-zero");
+  instanceSalt = disclose(salt);
+}
+
+// ---------------------------------------------------------------------------
+// Identity
+// ---------------------------------------------------------------------------
+
+// A party's public identity. Stable per user and deployment, as an address
+// is, so a seller's counters and track record accumulate under one key.
+//
+// Declared pure and taking the salt explicitly so a wallet can derive the same
+// key off chain: a seller needs a buyer's key to invoice them before any
+// transaction exists, and neither can call into a contract to get one.
+export pure circuit derivePartyKeyWith(salt: Bytes<32>, secret: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<3, Bytes<32>>>([tagParty(), salt, secret]);
+}
+
+circuit callerKey(): Bytes<32> {
+  return derivePartyKeyWith(instanceSalt, localSecret());
+}
+
+// ---------------------------------------------------------------------------
+// Time
+// ---------------------------------------------------------------------------
+
+// Refuse a timestamp the block cannot corroborate. A date in the future is
+// refused outright; a stale one is refused beyond the window.
+circuit assertNearBlockTime(t: Uint<64>): [] {
+  assert(blockTimeGte(t), "alpaca: timestamp is in the future");
+  assert(!blockTimeGt((t + TIMESTAMP_WINDOW()) as Uint<64>),
+         "alpaca: timestamp is too far in the past");
+}
+
+// ---------------------------------------------------------------------------
+// Derivations .. all pure, so the application computes exactly what the chain
+// computes, rather than reimplementing the hashes in the browser and hoping they
+// agree.
+// ---------------------------------------------------------------------------
+
+circuit u64Bytes(x: Uint<64>): Bytes<32> {
+  return x as Field as Bytes<32>;
+}
+
+export pure circuit deriveInvoiceId(sellerKey: Bytes<32>, nonce: Bytes<32>): Bytes<32> {
+  return persistentCommit<Vector<2, Bytes<32>>>([tagInvoiceId(), sellerKey], nonce);
+}
+
+// The invoice hash: one commitment over every term that matters, including the
+// ones that bind the payment (total, currency flag, payout addresses).
+export pure circuit computeInvoiceHash(frame: TermsFrame, nonce: Bytes<32>): Bytes<32> {
+  return persistentCommit<TermsFrame>(frame, nonce);
+}
+
+// A per-field salt derived from the invoice nonce and the field's own tag.
+//
+// With one salt for every field, handing an auditor the salt for one field would
+// give them the means to test guesses against all the others. Deriving one salt per field means a disclosure opens exactly one.
+export pure circuit deriveFieldSalt(nonce: Bytes<32>, tag: Bytes<32>): Bytes<32> {
+  return persistentHash<Vector<3, Bytes<32>>>([tagFieldSalt(), nonce, tag]);
+}
+
+// One field's commitment under an explicit salt. This is what an auditor runs:
+// they are handed the salt for each field they were granted, never the nonce.
+export pure circuit commitFieldWithSalt(tag: Bytes<32>, value: Bytes<32>, salt: Bytes<32>): Bytes<32> {
+  return persistentCommit<Vector<2, Bytes<32>>>([tag, value], salt);
+}
+
+// The same, for the party who holds the nonce.
+export pure circuit commitField(tag: Bytes<32>, value: Bytes<32>, nonce: Bytes<32>): Bytes<32> {
+  return commitFieldWithSalt(tag, value, deriveFieldSalt(nonce, tag));
+}
+
+// The tax tag: a commitment to the tax groups. A bare hash of the groups would
+// be easy to guess, because their inputs are round amounts; a salted commitment
+// is not.
+export pure circuit computeTaxTag(groups: TaxGroups, nonce: Bytes<32>): Bytes<32> {
+  return persistentCommit<TaxGroups>(groups, deriveFieldSalt(nonce, tagFieldTaxTag()));
+}
+
+// The registration-number digest. Unsalted: the number is published
+// by the tax authority, so there is nothing for a salt to protect.
+export pure circuit computeJctReg(number: Uint<64>): Bytes<32> {
+  return persistentHash<Vector<2, Bytes<32>>>([tagJct(), u64Bytes(number)]);
+}
+
+export pure circuit computeFieldCommitments(
+  frame: TermsFrame,
+  nonce: Bytes<32>,
+  taxTag: Bytes<32>,
+  jctReg: Bytes<32>
+): FieldCommitments {
+  return FieldCommitments {
+    amount:    commitField(tagFieldAmount(),   u64Bytes(frame.terms.amount),    nonce),
+    taxAmount: commitField(tagFieldTax(),      u64Bytes(frame.terms.taxAmount), nonce),
+    dueDate:   commitField(tagFieldDueDate(),  u64Bytes(frame.terms.dueDate),   nonce),
+    buyer:     commitField(tagFieldBuyer(),    frame.buyerKey,                  nonce),
+    seller:    commitField(tagFieldSeller(),   frame.sellerKey,                 nonce),
+    currency:  commitField(tagFieldCurrency(), frame.terms.currency,            nonce),
+    itemsHash: commitField(tagFieldItems(),    frame.terms.itemsHash,           nonce),
+    memoHash:  commitField(tagFieldMemo(),     frame.terms.memoHash,            nonce),
+    orderId:   commitField(tagFieldOrderId(),  frame.terms.orderId,             nonce),
+    taxTag:    commitField(tagFieldTaxTag(),   taxTag,                          nonce),
+    jctReg:    commitField(tagFieldJctReg(),   jctReg,                          nonce)
+  };
+}
+
+// The eleven commitments folded into one digest. An auditor recomputes the
+// fields they were granted, takes the masked ones from the envelope, and
+// rebuilds this exact root.
+export pure circuit computeCommitmentRoot(c: FieldCommitments): Bytes<32> {
+  return persistentHash<Vector<12, Bytes<32>>>([
+    tagFieldRoot(),
+    c.amount, c.taxAmount, c.dueDate, c.buyer, c.seller, c.currency,
+    c.itemsHash, c.memoHash, c.orderId, c.taxTag, c.jctReg
+  ]);
+}
+
+// The five rule bits, hashed. Rules R1..R4 are recorded, not enforced (by
+// design), so the digest is what an audit compares against; R5 is the hash
+// binding, which this contract establishes by construction.
+export pure circuit computeRulesResult(
+  r1: Boolean, r2: Boolean, r3: Boolean, r4: Boolean, r5: Boolean
+): Bytes<32> {
+  return persistentHash<Vector<5, Bytes<32>>>([
+    r1 as Field as Bytes<32>,
+    r2 as Field as Bytes<32>,
+    r3 as Field as Bytes<32>,
+    r4 as Field as Bytes<32>,
+    r5 as Field as Bytes<32>
+  ]);
+}
+
+// The settlement anchor: a commitment to (invoice, amount) blinded by a salt
+// only the payer holds. The payer later hands an auditor (invoice, amount,
+// salt) and the auditor recomputes this against `paymentCommitments`.
+export pure circuit computePaymentAnchor(
+  invoiceId: Bytes<32>,
+  amount: Uint<64>,
+  salt: Bytes<32>
+): Bytes<32> {
+  return persistentCommit<Vector<3, Bytes<32>>>([tagPayment(), invoiceId, u64Bytes(amount)], salt);
+}
+
+// ---------------------------------------------------------------------------
+// Rules
+// ---------------------------------------------------------------------------
+
+// One tax group, without division: tax * 10000 = net * rate.
+// A rate above 10000 basis points (100%) is refused rather than only noted in
+// a comment.
+circuit taxGroupValid(g: TaxGroup): Boolean {
+  return g.rateBps == 0
+    ? (g.netSum == 0 && g.taxSum == 0)
+    : (g.rateBps <= 10000 && g.taxSum * 10000 == g.netSum * g.rateBps);
+}
+
+// What must hold for an invoice to be created at all. R1..R4 are not among
+// these checks.
+circuit assertTermsValid(terms: InvoiceTerms, now: Uint<64>): [] {
+  assert(terms.amount > 0, "alpaca: amount must be positive");
+  assert(terms.amount <= MAX_INVOICE_AMOUNT(), "alpaca: amount exceeds the maximum");
+  assert(terms.dueDate >= now, "alpaca: due date is in the past");
+  assert(terms.amount + terms.taxAmount == terms.totalAmount,
+         "alpaca: total must equal amount plus tax");
+
+  if (terms.isJct) {
+    assert(taxGroupValid(terms.taxGroups.groupA), "alpaca: tax group A is inconsistent");
+    assert(taxGroupValid(terms.taxGroups.groupB), "alpaca: tax group B is inconsistent");
+    // Sum of (net + tax) over both groups equals the total.
+    assert((terms.taxGroups.groupA.netSum + terms.taxGroups.groupA.taxSum) +
+           (terms.taxGroups.groupB.netSum + terms.taxGroups.groupB.taxSum) == terms.totalAmount,
+           "alpaca: tax groups do not add up to the total");
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Small ledger helpers
+// ---------------------------------------------------------------------------
+
+circuit bumpInvoiceCount(key: Bytes<32>): [] {
+  const n: Uint<64> = invoiceCount.member(key) ? invoiceCount.lookup(key) : 0;
+  invoiceCount.insert(key, (n + 1) as Uint<64>);
+}
+
+circuit bumpAuditCounter(key: Bytes<32>): [] {
+  const n: Uint<64> = auditCounter.member(key) ? auditCounter.lookup(key) : 0;
+  auditCounter.insert(key, (n + 1) as Uint<64>);
+}
+
+// Decremented only above zero, which also stops an underflow abort.
+circuit dropAuditCounter(key: Bytes<32>): [] {
+  const n: Uint<64> = auditCounter.member(key) ? auditCounter.lookup(key) : 0;
+  if (n > 0) {
+    auditCounter.insert(key, (n - 1) as Uint<64>);
+  }
+}
+
+// Prove the caller holds terms that open this invoice's commitment.
+//
+// The terms and the nonce are passed IN rather than read here. A witness is
+// whatever the caller's own software returns, and every call is an independent
+// private input: a circuit that read `invoiceTerms()` here and again to check an
+// amount would be comparing two unrelated values, the first proven against the
+// commitment and the second free. Reading once and threading the value through
+// is what makes "the terms are the ones the chain committed to" true.
+circuit assertHoldsTerms(
+  id: Bytes<32>,
+  parties: Parties,
+  terms: InvoiceTerms,
+  nonce: Bytes<32>
+): [] {
+  const frame = TermsFrame {
+    sellerKey: parties.sellerKey,
+    buyerKey: parties.buyerKey,
+    terms: terms
+  };
+  assert(computeInvoiceHash(frame, nonce) == invoiceRegistry.lookup(id),
+         "alpaca: terms do not open the recorded commitment");
+}
+
+// ---------------------------------------------------------------------------
+// Create
+// ---------------------------------------------------------------------------
+
+// Create an invoice. Called by the seller; the buyer is named by key.
+//
+// Public:  the invoice identifier, both party keys, the arbiter key, and the
+//          digests listed in the ledger.
+// Private: every commercial term and every commitment opening.
+//
+// The commitments are computed in the circuit from witness data rather than
+// accepted as arguments, so what the ledger records cannot drift from what the
+// seller's machine actually holds.
+export circuit createInvoice(
+  buyerKey: Bytes<32>,
+  arbiterKey: Bytes<32>,
+  currentTime: Uint<64>
+): Bytes<32> {
+  const now = disclose(currentTime);
+  assertNearBlockTime(now);
+
+  const sellerKey = callerKey();
+  const buyer = disclose(buyerKey);
+  assert(disclose(sellerKey) != buyer, "alpaca: seller and buyer must differ");
+
+  const nonce = invoiceNonce();
+  const terms = invoiceTerms();
+  assertTermsValid(terms, now);
+
+  const id = disclose(deriveInvoiceId(sellerKey, nonce));
+  assert(!invoiceRegistry.member(id), "alpaca: invoice id already used");
+
+  const frame = TermsFrame { sellerKey: sellerKey, buyerKey: buyer, terms: terms };
+
+  const taxTag = terms.isJct ? computeTaxTag(terms.taxGroups, nonce) : default<Bytes<32>>;
+  const jctReg = terms.isJct ? computeJctReg(terms.jctNumber) : default<Bytes<32>>;
+
+  // R1..R5, recorded as a digest an audit can compare against.
+  const r1 = terms.taxAmount * 10000 == terms.amount * terms.taxRateBps;
+  const r2 = terms.dueDate >= now;
+  const r3 = terms.amount + terms.taxAmount == terms.expectedTotal;
+  const r4 = terms.lineItemsSum == terms.amount;
+
+  const commitments = computeFieldCommitments(frame, nonce, taxTag, jctReg);
+
+  invoiceRegistry.insert(id, disclose(computeInvoiceHash(frame, nonce)));
+  invoiceStatus.insert(id, InvoiceStatus.pending);
+  invoiceParties.insert(id, Parties { sellerKey: disclose(sellerKey), buyerKey: buyer });
+  invoiceCommitment.insert(id, disclose(computeCommitmentRoot(commitments)));
+  invoiceFieldCommitments.insert(id, disclose(commitments));
+  invoiceRulesResult.insert(id, disclose(computeRulesResult(r1, r2, r3, r4, true)));
+  invoiceTaxTag.insert(id, disclose(taxTag));
+  invoiceJctReg.insert(id, disclose(jctReg));
+  invoiceArbiter.insert(id, disclose(arbiterKey));
+
+  bumpInvoiceCount(disclose(sellerKey));
+  bumpAuditCounter(disclose(sellerKey));
+
+  return id;
+}
+
+// ---------------------------------------------------------------------------
+// Pay
+// ---------------------------------------------------------------------------
+
+// Pay an invoice in the native shielded token. Called by the buyer.
+//
+// The buyer pays the seller inside the transaction that marks the invoice paid,
+// and the contract never holds the money. `receiveShielded` requires the coin to
+// exist as an output addressed to this contract; `sendImmediateShielded` forwards
+// it to the seller in the same call, so the contract's balance changes by zero.
+// Zswap hides the value on both legs; what reaches public state is a status and
+// a settlement anchor. This is the shape OpenZeppelin's `ForwarderShielded`
+// uses.
+//
+// The payment must be the invoiced total, in the native token, to the address
+// the invoice names. All three come from terms that have just been proven to
+// open the chain's commitment, and none of the three figures reaches public
+// state.
+export circuit payInvoiceShielded(
+  invoiceId: Bytes<32>,
+  coin: ShieldedCoinInfo,
+  sellerPayout: ZswapCoinPublicKey,
+  paidAt: Uint<64>
+): [] {
+  const id = disclose(invoiceId);
+  const at = disclose(paidAt);
+  assertNearBlockTime(at);
+
+  assert(invoiceStatus.member(id), "alpaca: unknown invoice");
+  assert(invoiceStatus.lookup(id) == InvoiceStatus.pending, "alpaca: invoice is not open for payment");
+
+  const parties = invoiceParties.lookup(id);
+  assert(disclose(callerKey()) == parties.buyerKey, "alpaca: caller is not the buyer");
+
+  // Read once, then used for everything. See `assertHoldsTerms`.
+  const nonce = invoiceNonce();
+  const terms = invoiceTerms();
+  assertHoldsTerms(id, parties, terms, nonce);
+
+  assert(terms.currencyFlag == CurrencyFlag.credits, "alpaca: invoice is not payable in the native token");
+  assert(terms.totalAmount > 0, "alpaca: nothing to pay");
+  // Payment after the due date is refused. The due date stays private: the
+  // claimed time is bounded against the block above, and compared with the
+  // private date here without either leaving the circuit.
+  assert(at <= terms.dueDate, "alpaca: invoice is past its due date");
+  assert(coin.value == terms.totalAmount, "alpaca: payment does not equal the invoice total");
+  assert(coin.color == nativeToken(), "alpaca: payment is not in the native token");
+  assert(disclose(sellerPayout).bytes == terms.sellerPayout,
+         "alpaca: payment is not addressed to the seller on this invoice");
+
+  receiveShielded(disclose(coin));
+  sendImmediateShielded(
+    disclose(coin),
+    left<ZswapCoinPublicKey, ContractAddress>(disclose(sellerPayout)),
+    disclose(coin.value)
+  );
+
+  paymentCommitments.insert(
+    disclose(computePaymentAnchor(id, terms.totalAmount, settlementSalt())),
+    id
+  );
+  invoiceStatus.insert(id, InvoiceStatus.paid);
+}
+
+// ---------------------------------------------------------------------------
+// Cancel
+// ---------------------------------------------------------------------------
+
+// Cancel an unpaid invoice. Seller only, and only while it is pending: a paid
+// invoice records something that happened and cannot be retracted.
+export circuit cancelInvoice(invoiceId: Bytes<32>): [] {
+  const id = disclose(invoiceId);
+
+  assert(invoiceStatus.member(id), "alpaca: unknown invoice");
+  assert(invoiceStatus.lookup(id) == InvoiceStatus.pending, "alpaca: only a pending invoice can be cancelled");
+
+  const parties = invoiceParties.lookup(id);
+  assert(disclose(callerKey()) == parties.sellerKey, "alpaca: caller is not the seller");
+
+  invoiceStatus.insert(id, InvoiceStatus.cancelled);
+  dropAuditCounter(parties.sellerKey);
+}
+
+// ---------------------------------------------------------------------------
+// Audit authorization
+// ---------------------------------------------------------------------------
+
+// True when at least one slot is set. A grant that discloses nothing is almost
+// certainly a mistake in the caller, so it is refused rather than stored.
+circuit anyScope(s: Vector<9, Boolean>): Boolean {
+  return s[0] || s[1] || s[2] || s[3] || s[4] || s[5] || s[6] || s[7] || s[8];
+}
+
+// Authorise an auditor to see chosen fields of one invoice until a date. Seller
+// only.
+//
+// The ledger records a hash of the audit key, the field set and the expiry; the
+// key itself and the data travel off chain in an encrypted envelope. The auditor
+// recomputes the commitments for the fields in `scopes` and checks them against
+// the field commitments already recorded at creation.
+export circuit setAuditAuthorization(
+  invoiceId: Bytes<32>,
+  auditKeyHash: Bytes<32>,
+  scopes: Vector<9, Boolean>,
+  expiresAt: Uint<64>,
+  currentTime: Uint<64>
+): [] {
+  const id = disclose(invoiceId);
+
+  assert(invoiceStatus.member(id), "alpaca: unknown invoice");
+  const parties = invoiceParties.lookup(id);
+  assert(disclose(callerKey()) == parties.sellerKey, "alpaca: caller is not the seller");
+
+  assert(disclose(auditKeyHash) != default<Bytes<32>>, "alpaca: audit key hash must be set");
+  assert(anyScope(disclose(scopes)), "alpaca: authorization must disclose at least one field");
+  // Against the chain's clock, not against another argument the caller chose.
+  assert(blockTimeLt(disclose(expiresAt)), "alpaca: authorization must expire in the future");
+  assertNearBlockTime(disclose(currentTime));
+
+  auditAuthorization.insert(id, AuditAuthorization {
+    auditKeyHash: disclose(auditKeyHash),
+    scopes: disclose(scopes),
+    expiresAt: disclose(expiresAt),
+    issuer: parties.sellerKey
+  });
+}

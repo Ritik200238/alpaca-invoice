@@ -281,7 +281,7 @@ export class CryptoService implements ICryptoService {
   }
 
   /** Salt for KV store key derivation (shared by seller and buyer via invoiceId). */
-  private static readonly KV_DETAILS_KEY_SALT = 'alpaca-invoice-details-kv-v1';
+  private static readonly KV_DETAILS_KEY_SALT = 'inkan-invoice-details-kv-v1';
 
   /**
    * Derive a 256-bit key from invoiceId for online KV store encryption.
@@ -642,7 +642,7 @@ export class CryptoService implements ICryptoService {
 
     // Derive key using PBKDF2
     // Note: In production, the salt should be user-specific (e.g., derived from address)
-    const salt = new TextEncoder().encode('alpaca-invoice-salt-v1');
+    const salt = new TextEncoder().encode('inkan-invoice-salt-v1');
     const derivedBits = await crypto.subtle.deriveBits(
       {
         name: 'PBKDF2',

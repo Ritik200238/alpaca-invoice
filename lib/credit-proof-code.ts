@@ -8,7 +8,7 @@ export interface ShareableProof {
   expiresAt: number;
 }
 
-const PROOF_PREFIX = 'ALPACA-ZKP:';
+const PROOF_PREFIX = 'INKAN-ZKP:';
 
 export function encodeProofCode(proof: ShareableProof): string {
   const json = JSON.stringify({

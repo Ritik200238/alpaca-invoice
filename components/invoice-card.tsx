@@ -206,7 +206,7 @@ export default function InvoiceCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-primary-200/60 bg-white/70 px-3 py-2 text-sm font-medium text-primary-700 transition-colors hover:bg-white"
-                  title="View transaction on Aleo Explorer"
+                  title="View transaction on the explorer"
                 >
                   <ExternalLink className="h-4 w-4" />
                   {t('invoice.card.explorer')}

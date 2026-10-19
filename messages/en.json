@@ -58,7 +58,7 @@
     "balance": "Balance",
     "address": "Address",
     "notConnected": "Wallet not connected",
-    "connectPrompt": "Please connect your Aleo wallet to continue."
+    "connectPrompt": "Please connect your wallet to continue."
   },
   "dashboard": {
     "title": "Dashboard",
@@ -85,9 +85,9 @@
       "subtitle": "Fill in the details to create a new JCT-compliant invoice",
       "sellerAddress": "Seller Address (You)",
       "buyerAddress": "Buyer Address",
-      "buyerPlaceholder": "aleo1...",
+      "buyerPlaceholder": "Address…",
       "arbiterAddress": "Arbiter Address",
-      "arbiterPlaceholder": "aleo1... (third-party arbiter for escrow disputes)",
+      "arbiterPlaceholder": "Address… (third-party arbiter for escrow disputes)",
       "arbiterHint": "If set, the buyer can use Escrow Pay with this arbiter to handle disputes. Leave empty to disable escrow.",
       "tNumber": "JCT Registration Number (T-Number)",
       "tNumberPlaceholder": "13-digit number",
@@ -129,7 +129,7 @@
       "credits": "credits",
       "taxPerLine": "Tax (per-line)",
       "paymentCurrency": "Payment currency",
-      "currencyNote": "Invoice can be paid in Aleo Credits or USDCx only.",
+      "currencyNote": "Invoice can be paid in credits or the stablecoin only.",
       "orderIdPlaceholder": "PO-12345 or leave blank",
       "orderIdAutoGenerate": "Auto-generated if empty.",
       "memoPlaceholder": "Payment terms, notes, etc.",
@@ -419,7 +419,7 @@
     "evidence": "Evidence",
     "evidenceUpload": "Upload evidence file",
     "arbiter": "Arbiter",
-    "arbiterPlaceholder": "aleo1...",
+    "arbiterPlaceholder": "Address…",
     "arbiterFromEscrow": "Arbiter is inherited from the escrow payment and cannot be changed.",
     "deadline": "Resolution Deadline",
     "deadlineDefault": "14 days",
@@ -562,7 +562,7 @@
     "claimDetails": "Claim Details",
     "chainVerified": "On-Chain Verified",
     "proofExpired": "Proof Expired",
-    "verifiedWithClaim": "This credit claim has been verified on the Aleo blockchain. The prover meets the stated threshold.",
+    "verifiedWithClaim": "This credit claim has been verified on-chain. The prover meets the stated threshold.",
     "expiredExplain": "This proof was valid but has expired. Ask the prover to generate a new one.",
     "expired": "Expired",
     "rawTxWarning": "Only a raw Transaction ID was provided. For full claim details (type, threshold, expiry), ask the prover to share their Proof Code instead.",
@@ -597,7 +597,7 @@
     "zkPrivacy": "Privacy Preserving",
     "zkPrivacyDesc": "Raw invoice data never leaves your device",
     "zkOnChain": "On-Chain Verifiable",
-    "zkOnChainDesc": "Anyone can independently verify on the Aleo blockchain",
+    "zkOnChainDesc": "Anyone can independently verify on-chain",
     "zkUnforgeable": "Unforgeable",
     "zkUnforgeableDesc": "Mathematically guaranteed by ZK proof — impossible to fake",
     "noDataYet": "No transaction data yet. Collect metrics or load demo data to get started.",
@@ -636,7 +636,7 @@
     "currentAuthorization": "Current authorization"
   },
   "errors": {
-    "walletNotConnected": "Please connect your Aleo wallet first",
+    "walletNotConnected": "Please connect your wallet first",
     "walletNotInstalled": "Wallet extension not detected. Please install and refresh",
     "connectionFailed": "Unable to connect to wallet. Please confirm authorization",
     "networkMismatch": "Please switch to the correct network in your wallet",
@@ -661,9 +661,9 @@
     "failedToLoadInvoice": "Failed to load invoice details."
   },
   "onboarding": {
-    "welcome": "Welcome to Alpaca Invoice",
+    "welcome": "Welcome to Inkan",
     "step1Title": "Connect Your Wallet",
-    "step1Desc": "Connect your Aleo wallet to start using the app.",
+    "step1Desc": "Connect your wallet to start using the app.",
     "step2Title": "Unlock Your Data",
     "step2Desc": "Sign a message to decrypt your private invoice data.",
     "step3Title": "Create Your First Invoice",
@@ -674,7 +674,7 @@
     "done": "Done",
     "tour": {
       "walletTitle": "Step 1 — Connect Wallet",
-      "walletDesc": "Click this button to connect your Aleo wallet. This is the first step to use Alpaca Invoice.",
+      "walletDesc": "Click this button to connect your wallet. This is the first step to use Inkan.",
       "dashboardTitle": "Step 2 — Quick Actions",
       "dashboardDesc": "This is your Quick Actions panel. You can create invoices, check pending items, view receipts, or jump to the Audit Center.",
       "createTitle": "Step 3 — Create Invoice",
@@ -688,14 +688,14 @@
   "landing": {
     "hero": {
       "title": "Privacy-Preserving B2B Invoice System",
-      "subtitle": "Built on Aleo blockchain with zero-knowledge proofs for JCT compliance",
+      "subtitle": "Zero-knowledge proofs for JCT-compliant invoicing",
       "cta": "Get Started",
       "learnMore": "Learn More",
-      "poweredByAleo": "Powered by Aleo - Zero Knowledge Excellence",
+      "poweredByZk": "Powered by zero-knowledge proofs",
       "auditFriendly": "Audit-friendly ZK-Proofs",
       "invisibleInvoicing": "Invisible Invoicing",
       "settleGlobalTrades": "Settle Global Trades in Seconds",
-      "bodyText": "Competitors are mapping your supply chain via public chain data. Shield your procurement DNA with Aleo ZK-Proofs and secure your trade secrets.",
+      "bodyText": "Competitors are mapping your supply chain via public chain data. Shield your procurement DNA with zero-knowledge proofs and secure your trade secrets.",
       "globalImporters": "Global Importers",
       "supplyChainManagers": "Supply Chain Managers",
       "b2bWholesalers": "B2B Wholesalers",
@@ -740,7 +740,7 @@
       "featureColumn": "Feature",
       "legacyBanks": "Legacy Banks",
       "publicChains": "Public Chains",
-      "zkInvoiceAleo": "ZK-Invoice (Aleo)",
+      "productColumn": "Inkan",
       "supplyChainPrivacy": "Supply Chain Privacy",
       "bankKnowsAll": "Bank Knows All",
       "fullyPublic": "Fully Public",
@@ -762,7 +762,7 @@
       "critical": "CRITICAL (Exposed)",
       "zero": "ZERO (Encrypted)",
       "whatIsPrefix": "What is",
-      "whatIsHighlight": "ZK-Invoice?",
+      "whatIsHighlight": "Inkan?",
       "whatIsSubtitle": "Beyond simple payments — A privacy-first trading infrastructure",
       "zkRecordInvoicing": "ZK-Record Invoicing",
       "coreTechnology": "The Core Technology",
@@ -781,7 +781,7 @@
       "titleHighlight": "ZK-INVOICE",
       "titleSuffix": "WORKFLOW",
       "subtitle": "Encrypted from issuance to settlement",
-      "step1Title": "1. Issue ZK-Invoice",
+      "step1Title": "1. Issue Inkan",
       "step1Desc": "Seller generates a private InvoiceRecord. Details like amount and buyer address are encrypted on-chain.",
       "seller": "Seller",
       "buyer": "Buyer",
@@ -789,7 +789,7 @@
       "due": "Due",
       "createInvoiceBtn": "Create invoice",
       "step2Title": "2. Private Settlement",
-      "step2Desc": "Buyer settles using Aleo credits. The payment receipt is cryptographically linked to the invoice.",
+      "step2Desc": "Buyer settles using credits. The payment receipt is cryptographically linked to the invoice.",
       "step3Title": "3. Dual-Receipt Generation",
       "step3Desc": "Both parties hold immutable, private proof of settlement. Buyer gets proof of payment; seller gets accounting voucher."
     },
@@ -797,23 +797,23 @@
       "heading1": "CLOSE THE DEAL IN PRIVATE.",
       "heading2": "SETTLE IN SECONDS.",
       "button": "START PRIVATE TRADING",
-      "securedBy": "Secured by Aleo Zero-Knowledge Excellence"
+      "securedBy": "Secured by zero-knowledge proofs"
     },
     "footer": {
-      "tagline": "ZK-Invoice. The Global Standard for Private B2B Settlement."
+      "tagline": "Inkan. The Global Standard for Private B2B Settlement."
     }
   },
   "chatbot": {
-    "presetQ1": "What is Alpaca Invoice?",
+    "presetQ1": "What is Inkan?",
     "presetQ2": "How do I create an invoice?",
     "presetQ3": "How does the audit system work?",
     "presetQ4": "What wallets are supported?",
     "greeting": "Hi! I'm Paca",
-    "greetingSub": "Ask me anything about Alpaca Invoice",
+    "greetingSub": "Ask me anything about Inkan",
     "placeholder": "Ask something...",
-    "poweredBy": "Powered by DeepSeek · Alpaca Invoice AI",
+    "poweredBy": "Powered by DeepSeek · Inkan AI",
     "clearChat": "Clear chat",
-    "title": "Alpaca Invoice Assistant"
+    "title": "Inkan Assistant"
   },
   "verify": {
     "title": "Verify Invoice (Walletless)",
@@ -833,7 +833,7 @@
   },
   "docs": {
     "title": "Documentation",
-    "description": "Learn about the architecture, workflows, and how to use Alpaca Invoice",
+    "description": "Learn about the architecture, workflows, and how to use Inkan",
     "architecture": "Architecture",
     "architectureDesc": "Technical architecture overview including the 4-layer design, data flow, smart contracts, and storage strategy.",
     "businessFlow": "Business Flow",

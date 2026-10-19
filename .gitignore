@@ -12,7 +12,7 @@ coverage
 contracts/**/.env
 # 合约编译产物
 contracts/**/build/
-# Midnight contract package (contracts/midnight/alpaca-invoice)
+# Midnight contract package (contracts/midnight/inkan)
 #
 # Compiler output is reproducible from the source with the pinned toolchain, and
 # the proving keys alone run to hundreds of megabytes. `build/` is the fast

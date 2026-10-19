@@ -16,8 +16,8 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex w-full items-center justify-between rounded-xl border-2 border-alpaca-300 bg-alpaca-50 px-4 py-3 text-sm transition-all duration-200',
-      'placeholder:text-alpaca-400',
+      'flex w-full items-center justify-between rounded-xl border-2 border-inkan-300 bg-inkan-50 px-4 py-3 text-sm transition-all duration-200',
+      'placeholder:text-inkan-400',
       'focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20',
       'disabled:cursor-not-allowed disabled:opacity-50',
       '[&>span]:line-clamp-1',
@@ -41,7 +41,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'relative z-50 max-h-72 min-w-[8rem] overflow-hidden rounded-xl border-2 border-alpaca-200 bg-white shadow-lg',
+        'relative z-50 max-h-72 min-w-[8rem] overflow-hidden rounded-xl border-2 border-inkan-200 bg-white shadow-lg',
         'data-[state=open]:animate-in data-[state=closed]:animate-out',
         'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
@@ -75,7 +75,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       'relative flex w-full cursor-pointer select-none items-center rounded-lg py-2 pl-8 pr-3 text-sm outline-none',
-      'text-slate-700 hover:bg-alpaca-100 focus:bg-alpaca-100',
+      'text-slate-700 hover:bg-inkan-100 focus:bg-inkan-100',
       'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
     )}

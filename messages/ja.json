@@ -58,7 +58,7 @@
     "balance": "残高",
     "address": "アドレス",
     "notConnected": "ウォレット未接続",
-    "connectPrompt": "続行するにはAleoウォレットを接続してください。"
+    "connectPrompt": "続行するにはウォレットを接続してください。"
   },
   "dashboard": {
     "title": "ダッシュボード",
@@ -85,9 +85,9 @@
       "subtitle": "JCT準拠の請求書を作成するための詳細を入力してください",
       "sellerAddress": "売主アドレス（あなた）",
       "buyerAddress": "買主アドレス",
-      "buyerPlaceholder": "aleo1...",
+      "buyerPlaceholder": "アドレス…",
       "arbiterAddress": "仲裁人アドレス",
-      "arbiterPlaceholder": "aleo1...（エスクロー紛争用の第三者仲裁人）",
+      "arbiterPlaceholder": "アドレス…（エスクロー紛争用の第三者仲裁人）",
       "arbiterHint": "設定すると、買主はこの仲裁人でエスクロー支払いが可能になります。空の場合はエスクロー無効。",
       "tNumber": "JCT登録番号（T-Number）",
       "tNumberPlaceholder": "13桁の番号",
@@ -129,7 +129,7 @@
       "credits": "クレジット",
       "taxPerLine": "税（行ごと）",
       "paymentCurrency": "支払通貨",
-      "currencyNote": "請求書はAleo CreditsまたはUSDCxでのみ支払い可能です。",
+      "currencyNote": "請求書はcreditsまたはUSDCxでのみ支払い可能です。",
       "orderIdPlaceholder": "PO-12345 または空欄",
       "orderIdAutoGenerate": "空の場合は自動生成されます。",
       "memoPlaceholder": "支払条件、メモなど",
@@ -419,7 +419,7 @@
     "evidence": "証拠",
     "evidenceUpload": "証拠ファイルをアップロード",
     "arbiter": "仲裁人",
-    "arbiterPlaceholder": "aleo1...",
+    "arbiterPlaceholder": "アドレス…",
     "arbiterFromEscrow": "仲裁人はエスクロー支払いから引き継がれ、変更できません。",
     "deadline": "解決期限",
     "deadlineDefault": "14日間",
@@ -562,7 +562,7 @@
     "claimDetails": "主張の詳細",
     "chainVerified": "オンチェーン検証済み",
     "proofExpired": "証明期限切れ",
-    "verifiedWithClaim": "この信用主張はAleoブロックチェーン上で検証されました。証明者は記載された閾値を満たしています。",
+    "verifiedWithClaim": "この信用主張はブロックチェーン上で検証されました。証明者は記載された閾値を満たしています。",
     "expiredExplain": "この証明は有効でしたが期限切れです。証明者に再生成を依頼してください。",
     "expired": "期限切れ",
     "rawTxWarning": "トランザクションIDのみが提供されました。完全な主張詳細（タイプ、閾値、有効期限）を確認するには、証明者から「証明コード」を取得してください。",
@@ -597,7 +597,7 @@
     "zkPrivacy": "プライバシー保護",
     "zkPrivacyDesc": "元の請求書データはデバイスから離れません",
     "zkOnChain": "オンチェーン検証可能",
-    "zkOnChainDesc": "Aleoブロックチェーン上で誰でも独立に検証可能",
+    "zkOnChainDesc": "ブロックチェーン上で誰でも独立に検証可能",
     "zkUnforgeable": "偽造不可能",
     "zkUnforgeableDesc": "ZK証明の数学的保証により偽造は不可能",
     "noDataYet": "取引データがありません。指標を収集するかデモデータを読み込んでください。",
@@ -636,7 +636,7 @@
     "currentAuthorization": "現在の認可"
   },
   "errors": {
-    "walletNotConnected": "まずAleoウォレットを接続してください",
+    "walletNotConnected": "まずウォレットを接続してください",
     "walletNotInstalled": "ウォレット拡張機能が検出されません。インストールしてページを更新してください",
     "connectionFailed": "ウォレットに接続できません。認可を確認してください",
     "networkMismatch": "ウォレットで正しいネットワークに切り替えてください",
@@ -661,9 +661,9 @@
     "failedToLoadInvoice": "請求書の詳細の読み込みに失敗しました。"
   },
   "onboarding": {
-    "welcome": "Alpaca Invoiceへようこそ",
+    "welcome": "Inkanへようこそ",
     "step1Title": "ウォレットを接続",
-    "step1Desc": "Aleoウォレットを接続して利用を開始しましょう。",
+    "step1Desc": "ウォレットを接続して利用を開始しましょう。",
     "step2Title": "データのロック解除",
     "step2Desc": "メッセージに署名してプライベート請求書データを復号化します。",
     "step3Title": "最初の請求書を作成",
@@ -674,7 +674,7 @@
     "done": "完了",
     "tour": {
       "walletTitle": "ステップ1 — ウォレット接続",
-      "walletDesc": "このボタンをクリックしてAleoウォレットを接続します。Alpaca Invoiceを使用する最初のステップです。",
+      "walletDesc": "このボタンをクリックしてウォレットを接続します。Inkanを使用する最初のステップです。",
       "dashboardTitle": "ステップ2 — クイックアクション",
       "dashboardDesc": "クイックアクションパネルです。請求書の作成、未処理項目の確認、領収書の閲覧、監査センターへのジャンプができます。",
       "createTitle": "ステップ3 — 請求書作成",
@@ -688,14 +688,14 @@
   "landing": {
     "hero": {
       "title": "プライバシー保護のB2B請求書システム",
-      "subtitle": "Aleoブロックチェーンのゼロ知識証明で構築、JCTコンプライアンス対応",
+      "subtitle": "ブロックチェーンのゼロ知識証明で構築、JCTコンプライアンス対応",
       "cta": "始める",
       "learnMore": "詳しく見る",
-      "poweredByAleo": "Aleo搭載 - ゼロ知識の卓越性",
+      "poweredByZk": "ゼロ知識証明で保護",
       "auditFriendly": "監査対応ZKプルーフ",
       "invisibleInvoicing": "インビジブル・インボイシング",
       "settleGlobalTrades": "グローバル取引を数秒で決済",
-      "bodyText": "競合他社がパブリックチェーンデータからサプライチェーンをマッピングしています。Aleo ZKプルーフで調達DNAを保護し、企業秘密を守りましょう。",
+      "bodyText": "競合他社がパブリックチェーンデータからサプライチェーンをマッピングしています。ZKプルーフで調達DNAを保護し、企業秘密を守りましょう。",
       "globalImporters": "グローバル輸入業者",
       "supplyChainManagers": "サプライチェーン管理者",
       "b2bWholesalers": "B2B卸売業者",
@@ -740,7 +740,7 @@
       "featureColumn": "機能",
       "legacyBanks": "従来の銀行",
       "publicChains": "パブリックチェーン",
-      "zkInvoiceAleo": "ZK-Invoice (Aleo)",
+      "productColumn": "Inkan",
       "supplyChainPrivacy": "サプライチェーンプライバシー",
       "bankKnowsAll": "銀行がすべてを把握",
       "fullyPublic": "完全公開",
@@ -762,7 +762,7 @@
       "critical": "重大（露出）",
       "zero": "ゼロ（暗号化）",
       "whatIsPrefix": "",
-      "whatIsHighlight": "ZK-Invoiceとは？",
+      "whatIsHighlight": "Inkanとは？",
       "whatIsSubtitle": "単なる決済を超えて — プライバシーファーストの取引インフラ",
       "zkRecordInvoicing": "ZKレコード・インボイシング",
       "coreTechnology": "コアテクノロジー",
@@ -789,7 +789,7 @@
       "due": "期日",
       "createInvoiceBtn": "請求書を作成",
       "step2Title": "2. プライベート決済",
-      "step2Desc": "買主がAleoクレジットで決済します。支払い領収書は暗号学的に請求書にリンクされます。",
+      "step2Desc": "買主がクレジットで決済します。支払い領収書は暗号学的に請求書にリンクされます。",
       "step3Title": "3. デュアル領収書生成",
       "step3Desc": "両当事者が不変のプライベートな決済証明を保持します。買主は支払い証明を、売主は経理バウチャーを取得します。"
     },
@@ -797,23 +797,23 @@
       "heading1": "プライベートに取引を締結。",
       "heading2": "数秒で決済。",
       "button": "プライベート取引を開始",
-      "securedBy": "Aleoゼロ知識の卓越性により保護"
+      "securedBy": "ゼロ知識の卓越性により保護"
     },
     "footer": {
-      "tagline": "ZK-Invoice. プライベートB2B決済のグローバルスタンダード。"
+      "tagline": "Inkan. プライベートB2B決済のグローバルスタンダード。"
     }
   },
   "chatbot": {
-    "presetQ1": "Alpaca Invoiceとは何ですか？",
+    "presetQ1": "Inkanとは何ですか？",
     "presetQ2": "請求書を作成するにはどうすればよいですか？",
     "presetQ3": "監査システムはどのように機能しますか？",
     "presetQ4": "どのウォレットがサポートされていますか？",
     "greeting": "こんにちは！Pacaです",
-    "greetingSub": "Alpaca Invoiceについて何でも聞いてください",
+    "greetingSub": "Inkanについて何でも聞いてください",
     "placeholder": "質問を入力...",
-    "poweredBy": "Powered by DeepSeek · Alpaca Invoice AI",
+    "poweredBy": "Powered by DeepSeek · Inkan AI",
     "clearChat": "チャットをクリア",
-    "title": "Alpaca Invoice アシスタント"
+    "title": "Inkan アシスタント"
   },
   "verify": {
     "title": "請求書を検証（ウォレット不要）",
@@ -833,7 +833,7 @@
   },
   "docs": {
     "title": "ドキュメント",
-    "description": "Alpaca Invoiceのアーキテクチャ、ワークフロー、使用方法について学ぶ",
+    "description": "Inkanのアーキテクチャ、ワークフロー、使用方法について学ぶ",
     "architecture": "アーキテクチャ",
     "architectureDesc": "4層設計、データフロー、スマートコントラクト、ストレージ戦略を含む技術アーキテクチャの概要。",
     "businessFlow": "ビジネスフロー",

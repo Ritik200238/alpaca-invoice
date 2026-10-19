@@ -5,7 +5,7 @@ interface OnboardingPersistState {
 const VERSION = 'v2';
 
 function storageKey(publicKey: string | null): string {
-  return `alpaca-onboarding:${publicKey ?? 'guest'}:${VERSION}`;
+  return `inkan-onboarding:${publicKey ?? 'guest'}:${VERSION}`;
 }
 
 function safeRead(publicKey: string | null): OnboardingPersistState {

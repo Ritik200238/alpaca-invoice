@@ -58,7 +58,7 @@
     "balance": "余额",
     "address": "地址",
     "notConnected": "钱包未连接",
-    "connectPrompt": "请连接您的 Aleo 钱包以继续。"
+    "connectPrompt": "请连接您的 钱包以继续。"
   },
   "dashboard": {
     "title": "仪表盘",
@@ -85,9 +85,9 @@
       "subtitle": "填写详细信息以创建符合 JCT 标准的发票",
       "sellerAddress": "卖方地址（您）",
       "buyerAddress": "买方地址",
-      "buyerPlaceholder": "aleo1...",
+      "buyerPlaceholder": "地址…",
       "arbiterAddress": "仲裁人地址",
-      "arbiterPlaceholder": "aleo1...（用于托管支付争议的第三方仲裁人）",
+      "arbiterPlaceholder": "地址…（用于托管支付争议的第三方仲裁人）",
       "arbiterHint": "填写后，买方可使用托管支付，该仲裁人负责处理争议。留空则禁用托管功能。",
       "tNumber": "JCT 登记号（T-Number）",
       "tNumberPlaceholder": "13位数字",
@@ -129,7 +129,7 @@
       "credits": "积分",
       "taxPerLine": "税额（按行）",
       "paymentCurrency": "支付币种",
-      "currencyNote": "发票仅可使用 Aleo Credits 或 USDCx 支付。",
+      "currencyNote": "发票仅可使用 credits 或 USDCx 支付。",
       "orderIdPlaceholder": "PO-12345 或留空",
       "orderIdAutoGenerate": "为空时将自动生成。",
       "memoPlaceholder": "付款条款、备注等",
@@ -419,7 +419,7 @@
     "evidence": "证据",
     "evidenceUpload": "上传证据文件",
     "arbiter": "仲裁人",
-    "arbiterPlaceholder": "aleo1...",
+    "arbiterPlaceholder": "地址…",
     "arbiterFromEscrow": "仲裁人继承自托管支付，不可修改。",
     "deadline": "解决截止日期",
     "deadlineDefault": "14 天",
@@ -562,7 +562,7 @@
     "claimDetails": "声明详情",
     "chainVerified": "链上验证通过",
     "proofExpired": "证明已过期",
-    "verifiedWithClaim": "此信用声明已在 Aleo 区块链上验证通过，证明方满足所述阈值要求。",
+    "verifiedWithClaim": "此信用声明已在 区块链上验证通过，证明方满足所述阈值要求。",
     "expiredExplain": "此证明曾有效但已过期，请联系证明方重新生成。",
     "expired": "已过期",
     "rawTxWarning": "仅提供了交易 ID，无法查看完整声明详情（类型、阈值、有效期）。建议向证明方索取「证明码」。",
@@ -597,7 +597,7 @@
     "zkPrivacy": "隐私保护",
     "zkPrivacyDesc": "原始发票数据永远不会离开你的设备",
     "zkOnChain": "链上可验证",
-    "zkOnChainDesc": "任何人都可以在 Aleo 链上独立验证",
+    "zkOnChainDesc": "任何人都可以在 链上独立验证",
     "zkUnforgeable": "不可伪造",
     "zkUnforgeableDesc": "ZK 证明的数学保证，无法作假",
     "noDataYet": "暂无交易数据。收集指标或加载示例数据开始体验。",
@@ -636,7 +636,7 @@
     "currentAuthorization": "当前授权"
   },
   "errors": {
-    "walletNotConnected": "请先连接您的 Aleo 钱包",
+    "walletNotConnected": "请先连接您的 钱包",
     "walletNotInstalled": "未检测到钱包扩展，请安装后刷新页面",
     "connectionFailed": "无法连接钱包，请确认授权",
     "networkMismatch": "请在钱包中切换到正确的网络",
@@ -661,9 +661,9 @@
     "failedToLoadInvoice": "加载发票详情失败。"
   },
   "onboarding": {
-    "welcome": "欢迎使用 Alpaca Invoice",
+    "welcome": "欢迎使用 Inkan",
     "step1Title": "连接钱包",
-    "step1Desc": "连接您的 Aleo 钱包开始使用。",
+    "step1Desc": "连接您的 钱包开始使用。",
     "step2Title": "解锁数据",
     "step2Desc": "签名消息以解密您的私密发票数据。",
     "step3Title": "创建第一张发票",
@@ -674,7 +674,7 @@
     "done": "完成",
     "tour": {
       "walletTitle": "步骤一 — 连接钱包",
-      "walletDesc": "点击此按钮连接您的 Aleo 钱包。这是使用 Alpaca Invoice 的第一步。",
+      "walletDesc": "点击此按钮连接您的 钱包。这是使用 Inkan 的第一步。",
       "dashboardTitle": "步骤二 — 快捷操作",
       "dashboardDesc": "这是您的快捷操作面板。您可以创建发票、查看待处理项目、查看收据或跳转到审计中心。",
       "createTitle": "步骤三 — 创建发票",
@@ -688,14 +688,14 @@
   "landing": {
     "hero": {
       "title": "隐私保护的 B2B 发票系统",
-      "subtitle": "基于 Aleo 区块链零知识证明构建，符合 JCT 合规要求",
+      "subtitle": "基于 区块链零知识证明构建，符合 JCT 合规要求",
       "cta": "立即开始",
       "learnMore": "了解更多",
-      "poweredByAleo": "由 Aleo 驱动 - 零知识卓越技术",
+      "poweredByZk": "由零知识证明保护",
       "auditFriendly": "审计友好的 ZK 证明",
       "invisibleInvoicing": "隐形开票",
       "settleGlobalTrades": "秒级完成全球贸易结算",
-      "bodyText": "竞争对手正通过公链数据绘制您的供应链图谱。使用 Aleo ZK 证明保护您的采购 DNA，守护商业机密。",
+      "bodyText": "竞争对手正通过公链数据绘制您的供应链图谱。使用 ZK 证明保护您的采购 DNA，守护商业机密。",
       "globalImporters": "全球进口商",
       "supplyChainManagers": "供应链管理者",
       "b2bWholesalers": "B2B 批发商",
@@ -740,7 +740,7 @@
       "featureColumn": "功能",
       "legacyBanks": "传统银行",
       "publicChains": "公链",
-      "zkInvoiceAleo": "ZK-Invoice (Aleo)",
+      "productColumn": "Inkan",
       "supplyChainPrivacy": "供应链隐私",
       "bankKnowsAll": "银行掌握一切",
       "fullyPublic": "完全公开",
@@ -762,7 +762,7 @@
       "critical": "严重（暴露）",
       "zero": "零（加密）",
       "whatIsPrefix": "什么是",
-      "whatIsHighlight": "ZK-Invoice？",
+      "whatIsHighlight": "Inkan？",
       "whatIsSubtitle": "不仅仅是支付 — 隐私优先的贸易基础设施",
       "zkRecordInvoicing": "ZK 记录开票",
       "coreTechnology": "核心技术",
@@ -789,7 +789,7 @@
       "due": "到期日",
       "createInvoiceBtn": "创建发票",
       "step2Title": "2. 隐私结算",
-      "step2Desc": "买方使用 Aleo 积分结算。支付收据与发票以密码学方式关联。",
+      "step2Desc": "买方使用 积分结算。支付收据与发票以密码学方式关联。",
       "step3Title": "3. 双方收据生成",
       "step3Desc": "双方都持有不可变的私密结算证明。买方获得付款证明；卖方获得记账凭证。"
     },
@@ -797,23 +797,23 @@
       "heading1": "私密完成交易。",
       "heading2": "秒级结算。",
       "button": "开始隐私交易",
-      "securedBy": "由 Aleo 零知识卓越技术保障"
+      "securedBy": "由 零知识卓越技术保障"
     },
     "footer": {
-      "tagline": "ZK-Invoice. 全球隐私 B2B 结算标准。"
+      "tagline": "Inkan. 全球隐私 B2B 结算标准。"
     }
   },
   "chatbot": {
-    "presetQ1": "什么是 Alpaca Invoice？",
+    "presetQ1": "什么是 Inkan？",
     "presetQ2": "如何创建发票？",
     "presetQ3": "审计系统如何运作？",
     "presetQ4": "支持哪些钱包？",
     "greeting": "你好！我是 Paca",
-    "greetingSub": "关于 Alpaca Invoice 的任何问题都可以问我",
+    "greetingSub": "关于 Inkan 的任何问题都可以问我",
     "placeholder": "请输入问题...",
-    "poweredBy": "由 DeepSeek 驱动 · Alpaca Invoice AI",
+    "poweredBy": "由 DeepSeek 驱动 · Inkan AI",
     "clearChat": "清除对话",
-    "title": "Alpaca Invoice 助手"
+    "title": "Inkan 助手"
   },
   "verify": {
     "title": "验证发票（无需钱包）",
@@ -833,7 +833,7 @@
   },
   "docs": {
     "title": "文档",
-    "description": "了解 Alpaca Invoice 的架构、工作流程和使用方法",
+    "description": "了解 Inkan 的架构、工作流程和使用方法",
     "architecture": "系统架构",
     "architectureDesc": "技术架构概览，包括4层设计、数据流、智能合约和存储策略。",
     "businessFlow": "业务流程",

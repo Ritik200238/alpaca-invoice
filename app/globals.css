@@ -149,15 +149,15 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center rounded-xl border-2 border-alpaca-300 bg-alpaca-100 px-6 py-3 text-sm font-semibold text-alpaca-800 transition-all duration-200;
+    @apply inline-flex items-center justify-center rounded-xl border-2 border-inkan-300 bg-inkan-100 px-6 py-3 text-sm font-semibold text-inkan-800 transition-all duration-200;
   }
   .btn-secondary:hover {
-    @apply border-alpaca-400 bg-alpaca-200;
+    @apply border-inkan-400 bg-inkan-200;
   }
 
   /* Input styles */
   .input-field {
-    @apply w-full rounded-xl border-2 border-alpaca-300 bg-alpaca-50 px-4 py-3 text-sm transition-all duration-200 placeholder:text-alpaca-400;
+    @apply w-full rounded-xl border-2 border-inkan-300 bg-inkan-50 px-4 py-3 text-sm transition-all duration-200 placeholder:text-inkan-400;
   }
   .input-field:focus {
     @apply border-accent-500 outline-none ring-2 ring-accent-500/25;
@@ -191,7 +191,7 @@
 
   /* Skeleton loading */
   .skeleton {
-    @apply animate-pulse bg-alpaca-200 rounded;
+    @apply animate-pulse bg-inkan-200 rounded;
   }
 
   /* Marquee animations */
