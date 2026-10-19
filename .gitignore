@@ -29,3 +29,8 @@ contracts/midnight/**/node_modules/
 
 # Wallet and test-run logs
 contracts/midnight/**/logs/
+
+# Session control files and per-run copies of the flow
+contracts/midnight/**/scripts/.run-flow
+contracts/midnight/**/scripts/.stop
+contracts/midnight/**/scripts/flow.run-*.ts
