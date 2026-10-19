@@ -150,6 +150,6 @@ The project has two layers of tests:
 - [Business Flow](./docs/BUSINESS_FLOW.md) - Complete business logic flows
 - [Audit Package API](./docs/API_AUDIT_PACKAGE.md) - v2.2 schema, scopes bitmask, examples
 
-## License
+## Contributors
 
-MIT
+- Ritik Pandey

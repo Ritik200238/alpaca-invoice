@@ -2,6 +2,10 @@
   "name": "zk-invoice",
   "version": "0.1.0",
   "private": true,
+  "author": "Ritik Pandey",
+  "contributors": [
+    "Ritik Pandey"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
