@@ -170,6 +170,21 @@ const tests = () =>
     killSignal: 'SIGKILL',
   });
 
+// A run killed part-way leaves a deliberately broken file behind and its backup
+// beside it. Restoring any such backup first matters more than it looks: without
+// it the next run would take the broken file as the original, and every pattern
+// it then failed to find would read as a harness error.
+for (const file of [CONTRACT, WITNESSES]) {
+  const leftover = `${file}.mutation-backup`;
+  try {
+    copyFileSync(leftover, file);
+    rmSync(leftover);
+    console.log(`recovered ${file} from an interrupted run`);
+  } catch {
+    /* no leftover */
+  }
+}
+
 const only = process.argv[2];
 const backups = new Map();
 const backup = (file) => {
