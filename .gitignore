@@ -26,3 +26,6 @@ contracts/midnight/**/node_modules/
 *-signing-keys/
 *.level
 *.mutation-backup
+
+# Wallet and test-run logs
+contracts/midnight/**/logs/
