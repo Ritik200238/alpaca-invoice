@@ -1,0 +1,49 @@
+killed           create: allow a seller to invoice themselves
+killed           create: allow a zero amount
+killed           create: drop the amount cap
+killed           create: let total differ from amount plus tax
+killed           create: allow a due date in the past
+killed           create: allow an invoice id to be reused
+killed           tax: skip the check on group A
+killed           tax: skip the check on group B
+killed           tax: skip the groups-sum-to-total check
+killed           tax: accept any tax for a used rate slot
+killed           tax: allow a rate above 100%
+killed           tax: let an unused slot carry a value
+killed           tax: validate the groups of an invoice that is not qualified
+killed           rules: record R1 as always true
+killed           rules: record R3 as always true
+killed           rules: record R4 as always true
+killed           commitments: stop salting the tax tag
+killed           commitments: salt every field with the nonce itself
+killed           commitments: leave the payout addresses out of the committed terms
+killed           counters: stop counting invoices against the seller
+killed           counters: stop counting invoices in the audit counter
+killed           pay: let anyone pay
+killed           pay: let a paid invoice be paid again
+killed           pay: believe whatever terms the payer claims
+killed           pay: accept the wrong amount
+killed           pay: accept the wrong token
+killed           pay: accept any recipient
+killed           pay: accept payment after the due date
+killed           pay: accept an invoice in the other currency
+killed           pay: keep the coin instead of forwarding it
+killed           pay: forget the settlement anchor
+killed           pay: leave the invoice open after paying
+killed           cancel: let anyone cancel
+killed           cancel: let a paid invoice be cancelled
+killed           cancel: leave the audit counter alone
+equivalent       cancel: let the audit counter underflow
+killed           audit: let anyone authorise an auditor
+killed           audit: allow an authorization that discloses nothing
+killed           audit: allow a zero audit key hash
+killed           audit: allow an expiry already in the past
+killed           audit: forget to record the authorization
+killed           time: let a caller claim a time in the future
+killed           time: drop the bound on how stale a claim may be
+killed           time: widen the window to a year
+killed           identity: derive a party key without the deployment salt
+killed           witness: accept an all-zero secret
+
+45 of 45 mutants caught; 1 equivalent, not counted
+  equivalent: cancel: let the audit counter underflow -- unreachable: a pending invoice is always counted, so the counter is at least 1 at cancel

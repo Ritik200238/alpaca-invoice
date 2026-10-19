@@ -1,0 +1,10 @@
+{
+  "network": "preview",
+  "contractAddress": "15efb99ca21bb255b0f12a1de56c0519d3f98e95c4e1e4f341aea8fa0f4ec2a8",
+  "circuit": "constructor",
+  "txHash": "bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3",
+  "blockHeight": 1364749,
+  "blockTimestamp": "2026-10-19T11:24:36+00:00",
+  "status": "SUCCESS",
+  "source": "read from the public indexer https://indexer.preview.midnight.network/api/v4/graphql"
+}

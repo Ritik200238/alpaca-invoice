@@ -1,5 +1,32 @@
 # Alpaca Invoice
 
+**Invoices settle on-chain. Their terms never do.**
+
+Private B2B invoicing with Japanese consumption-tax rules, shielded settlement and
+selective audit. It began on Aleo and is being ported to [Midnight](https://midnight.network).
+This branch holds the Midnight work; the Aleo product it came from is described further down.
+
+## On Midnight: where it stands
+
+| | |
+|---|---|
+| **Contract** | [`contracts/midnight/alpaca-invoice`](contracts/midnight/alpaca-invoice): 4 entry points (create, pay, cancel, audit authorization), compiled with Compact 0.31.1 with real proving and verifying keys for all four circuits |
+| **Tests** | 88 in-process tests against the compiled contract: `npm test` in the contract folder |
+| **Mutation sweep** | 45 of 45 mutants caught, plus one provably unreachable case that is named, not counted: `npm run test:mutation` |
+| **Deployed** | Midnight Preview, contract `15efb99ca21bb255b0f12a1de56c0519d3f98e95c4e1e4f341aea8fa0f4ec2a8`. Deploy transaction [`bbaa1cd4…00b3`](https://explorer.1am.xyz/tx/bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3?network=preview), block 1,364,749, `SUCCESS`, read back from the public indexer |
+| **Interface** | restyled (colours, font, corner radius; no layout or flow changes) and not yet connected to Midnight |
+| **Not yet ported** | escrow, disputes, the stablecoin payment path, the credit proof. See the [contract README](contracts/midnight/alpaca-invoice/README.md) for what each becomes and why the credit proof is not a straight port |
+
+The design, what the chain can and cannot see, every difference from the Aleo program and
+why, and how to run it are in the [contract README](contracts/midnight/alpaca-invoice/README.md).
+Midnight code is Apache-2.0 ([LICENSE](LICENSE), [NOTICE](NOTICE)).
+
+---
+
+# The original Aleo version
+
+# Alpaca Invoice
+
 Privacy-preserving B2B invoice system on Aleo. Private Records plus public anchors (hash, commitments, rules_result, audit auth/counter) enable selective, chain-verifiable audits.
 
 **Current contract:** `zk_invoice_v3_1.aleo` (testnet) — tx `at1kf9tl2vmd84398qrpzdrmtfkw2jdt4revyjlv2hmv5efg6rnegzqp3a0yp`
