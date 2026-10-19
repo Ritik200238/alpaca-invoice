@@ -34,3 +34,4 @@ contracts/midnight/**/logs/
 contracts/midnight/**/scripts/.run-flow
 contracts/midnight/**/scripts/.stop
 contracts/midnight/**/scripts/flow.run-*.ts
+contracts/midnight/**/midnight-level-db/
