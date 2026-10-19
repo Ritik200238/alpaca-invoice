@@ -1,0 +1,61 @@
+Alpaca Invoice
+Copyright 2026 Ritik Pandey
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+
+
+WHAT THIS REPOSITORY IS
+=======================
+
+Alpaca Invoice began as a private B2B invoicing product on Aleo (Leo programs
+under `contracts/zk_*` and `src/main.leo`, a Next.js application around them).
+It is being ported to Midnight. The Midnight contract lives in
+`contracts/midnight/alpaca-invoice` and is Apache-2.0. The Aleo programs are kept
+for history and for the comparison the port is checked against; they declare MIT
+in their own `program.json` and remain available on those terms.
+
+
+ECOSYSTEM ATTRIBUTION
+=====================
+
+The Midnight work builds on patterns published by the Midnight Foundation and
+the wider ecosystem. Where a file adapts someone else's code closely, its header
+says so. This file records the debts that are architectural.
+
+Every Compact circuit and every witness implementation is original to this
+project. What was borrowed is design, and it is listed so a reader can go and
+check the originals.
+
+Midnight Foundation (https://github.com/midnightntwrk)
+------------------------------------------------------
+
+  midnightntwrk/midnight-local-dev                      Apache-2.0
+  midnightntwrk/example-bboard                          Apache-2.0
+      `contracts/midnight/alpaca-invoice/scripts/lib/wallet.ts` adapts the wallet
+      construction, sync, funding and DUST-registration sequence from these two.
+      The surrounding structure, the retry on a registration fee that has not yet
+      accrued, and the block-limit probe are ours.
+
+  midnightntwrk/example-zkloan                          Apache-2.0
+      The identity model. Every party key is a domain-separated hash of a
+      witness-held secret, and `ownPublicKey()` is never used to authorise
+      anything, as the Midnight security guidance requires.
+
+OpenZeppelin (https://github.com/OpenZeppelin/compact-contracts)
+----------------------------------------------------------------
+
+  ForwarderShielded                                      MIT
+      The shape of `payInvoiceShielded`: the contract receives the buyer's
+      shielded coin and forwards it to the seller in the same call, so it never
+      holds the money. Read for the pattern; no code was copied.
+
+Aleo (https://aleo.org)
+-----------------------
+
+  The product's rules -- the invoice states, the consumption-tax group checks,
+  the five recorded rule bits, the eleven per-field commitments, the escrow and
+  dispute lifecycle -- come from the original Aleo programs in this repository,
+  written by the same author. The port restates them in Compact; it does not
+  translate Leo.

@@ -12,3 +12,17 @@ coverage
 contracts/**/.env
 # 合约编译产物
 contracts/**/build/
+# Midnight contract package (contracts/midnight/alpaca-invoice)
+#
+# Compiler output is reproducible from the source with the pinned toolchain, and
+# the proving keys alone run to hundreds of megabytes. `build/` is the fast
+# compile the tests use; `build-zk/` is the full compile with keys.
+contracts/midnight/**/build-zk/
+contracts/midnight/**/dist/
+contracts/midnight/**/node_modules/
+# Local private state: these hold the openings that make an invoice provable.
+# They are per-machine and must never be shared or committed.
+*-private-state/
+*-signing-keys/
+*.level
+*.mutation-backup
