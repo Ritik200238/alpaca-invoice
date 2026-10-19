@@ -78,7 +78,7 @@ def scenes() -> list[dict]:
 
     # 1 ------------------------------------------------------------------
     sub = (
-        "Ported from Aleo to Midnight. The first four circuits, tested and live on Preview."
+        "Ported from Aleo to Midnight. Four circuits, tested in process and deployed to Preview."
         if onchain
         else "Ported from Aleo to Midnight. The first four circuits, tested in process."
     )

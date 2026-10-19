@@ -112,12 +112,18 @@ def run(cmd: list[str], **kw) -> subprocess.CompletedProcess:
 def render(html_text: str, png: Path) -> None:
     src = png.with_suffix(".html")
     src.write_text(html_text, encoding="utf-8")
-    run([
-        EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
-        f"--window-size={W},{H}", f"--screenshot={png}", "--virtual-time-budget=1500", src.resolve().as_uri(),
-    ])
-    if not png.exists() or png.stat().st_size < 5000:
-        sys.exit(f"render produced no picture for {png.name}")
+    # Edge sometimes exits non-zero after writing the picture, with an internal
+    # task-manager warning. The picture is what matters, so that is what is checked,
+    # and a failed attempt is retried once.
+    for attempt in range(2):
+        png.unlink(missing_ok=True)
+        subprocess.run([
+            EDGE, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
+            f"--window-size={W},{H}", f"--screenshot={png}", "--virtual-time-budget=1500", src.resolve().as_uri(),
+        ], capture_output=True, text=True)
+        if png.exists() and png.stat().st_size >= 5000:
+            return
+    sys.exit(f"render produced no picture for {png.name}")
 
 
 async def speak(text: str, mp3: Path) -> None:
