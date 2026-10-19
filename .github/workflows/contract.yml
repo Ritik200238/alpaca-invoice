@@ -1,0 +1,50 @@
+name: Contract
+
+on:
+  push:
+    branches: [midnight-port]
+    paths: ['contracts/midnight/**', '.github/workflows/contract.yml']
+  pull_request:
+    paths: ['contracts/midnight/**', '.github/workflows/contract.yml']
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Compile, typecheck and test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: contracts/midnight/inkan
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: contracts/midnight/inkan/package-lock.json
+
+      - name: Install the Compact toolchain
+        run: |
+          curl --proto '=https' --tlsv1.2 -LsSf \
+            https://github.com/midnightntwrk/compact/releases/download/compact-v0.5.1/compact-installer.sh | sh
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+
+      # The contract declares `pragma language_version 0.23`, which toolchain
+      # 0.31.1 provides. A bare `compact update` would move past it.
+      - name: Pin the compiler
+        run: compact update 0.31.1
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The simulator tests run the compiled circuits in process and need no
+      # proving keys, so the key generation step is skipped here.
+      - name: Compile the contract
+        run: npm run compact:fast
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Run the simulator tests
+        run: npm test
