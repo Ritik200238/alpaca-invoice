@@ -164,7 +164,7 @@ def scenes() -> list[dict]:
     if mut:
         k, n = mut
         mtxt = (f"<div style='height:30px'></div><div class='cards' style='--cols:2'><div class='card'><div class='n'>{k} of {n}</div>"
-                "<div class='l'>rules broken on purpose, each caught by a failing test</div></div>"
+                "<div class='l'>rules broken on purpose, each caught by a failing test. One more is provably unreachable and is listed separately in the repo</div></div>"
                 "<div class='card'><div class='n'>4</div><div class='l'>circuits compiled with real proving keys</div></div></div>")
         states6.append({"body": h6 + mtxt, "say": f"To check the tests can fail, each rule was removed in turn and the contract recompiled. {k} of {n} removals were caught."})
     out.append({"id": "tests", "label": "Tests and mutation", "states": states6})

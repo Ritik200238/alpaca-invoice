@@ -164,7 +164,7 @@ def build(scenes: list[dict], stills_only: bool) -> None:
             run([
                 "ffmpeg", "-y", "-loglevel", "error", "-loop", "1", "-i", str(png), "-t", f"{d:.3f}",
                 "-vf", f"zoompan=z='1+0.00018*on':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={frames}:s={W}x{H}:fps={FPS},format=yuv420p",
-                "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", str(seg),
+                "-r", str(FPS), "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", str(seg),
             ])
             parts.append(seg)
 
@@ -183,11 +183,11 @@ def build(scenes: list[dict], stills_only: bool) -> None:
                 last = out
             cur = WORK / f"{sid}-chain.mp4"
             run(["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex", ";".join(filt),
-                 "-map", f"[{last}]", "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-pix_fmt", "yuv420p", str(cur)])
+                 "-map", f"[{last}]", "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", str(cur)])
 
         run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(cur), "-t", f"{total:.3f}",
              "-vf", f"fade=t=in:st=0:d={DIP},fade=t=out:st={total - DIP:.3f}:d={DIP}",
-             "-c:v", "libx264", "-preset", "veryfast", "-crf", "17", "-pix_fmt", "yuv420p", str(clip)])
+             "-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p", str(clip)])
 
         padded = WORK / f"{sid}-pad.m4a"
         run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(mp3), "-af",
