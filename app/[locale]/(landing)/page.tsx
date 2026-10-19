@@ -112,7 +112,7 @@ export default function LandingPage() {
       tag: 'transition create_invoice',
     },
     {
-      icon: <Cpu className="h-8 w-8 text-primary-500" />,
+      icon: <Cpu className="h-8 w-8 text-primary-400" />,
       title: '2. Private Settlement',
       description:
         'Buyer settles using Aleo credits. The payment receipt is cryptographically linked to the invoice, updating status to PAID privately.',
@@ -208,7 +208,7 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="block whitespace-nowrap bg-gradient-to-r from-accent-400 via-white to-amber-600 bg-clip-text text-transparent italic font-black tracking-tighter
+                  className="block whitespace-nowrap bg-gradient-to-r from-accent-400 via-white to-accent-500 bg-clip-text text-transparent italic font-black tracking-tighter
                              text-[clamp(1.75rem,6vw+0.5rem,8rem)] leading-[1.1]
                              animate-title-shimmer animate-title-glow"
                 >
@@ -228,7 +228,7 @@ export default function LandingPage() {
                 {t('landing.hero.bodyText')}
               </p>
 
-              <div className="mb-5 sm:mb-8 md:mb-10 flex flex-wrap gap-3 sm:gap-4 md:gap-6 text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-primary-500">
+              <div className="mb-5 sm:mb-8 md:mb-10 flex flex-wrap gap-3 sm:gap-4 md:gap-6 text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.2em] text-primary-400">
                 <div className="flex items-center gap-2 group cursor-default">
                   <Globe className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-accent-500 transition-transform group-hover:rotate-12" />
                   {t('landing.hero.globalImporters')}
@@ -332,7 +332,7 @@ export default function LandingPage() {
                     </div>
                     <div>
                       <h4 className="text-lg md:text-xl font-black uppercase tracking-wider text-primary-100">{item.title}</h4>
-                      <p className="text-base md:text-lg font-medium text-primary-500">{item.desc}</p>
+                      <p className="text-base md:text-lg font-medium text-primary-400">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -354,7 +354,7 @@ export default function LandingPage() {
                   className={`flex flex-1 items-center justify-center gap-3 rounded-xl px-6 py-5 text-sm font-black uppercase tracking-[0.2em] transition-all ${
                     activeTab === 'transparency'
                       ? 'border border-red-500/30 bg-red-500/10 text-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]'
-                      : 'text-primary-500 hover:text-primary-400'
+                      : 'text-primary-400 hover:text-primary-200'
                   }`}
                 >
                   <Eye className="h-5 w-5 flex-shrink-0" />
@@ -365,8 +365,8 @@ export default function LandingPage() {
                   onClick={() => setActiveTab('privacy')}
                   className={`flex flex-1 items-center justify-center gap-3 rounded-xl px-6 py-5 text-sm font-black uppercase tracking-[0.2em] transition-all ${
                     activeTab === 'privacy' 
-                      ? 'bg-accent-600 text-white shadow-[0_10px_30px_rgba(245,158,11,0.3)]' 
-                      : 'text-primary-500 hover:text-primary-400'
+                      ? 'bg-accent-600 text-white shadow-[0_10px_30px_rgba(15,118,110,0.35)]' 
+                      : 'text-primary-400 hover:text-primary-200'
                   }`}
                 >
                   <EyeOff className="h-5 w-5 flex-shrink-0" />
@@ -389,7 +389,7 @@ export default function LandingPage() {
                       </div>
                       <div className="space-y-4 rounded-3xl border border-red-500/20 bg-red-500/5 p-8">
                         <div className="flex justify-between border-b border-red-500/10 pb-4">
-                          <span className="tracking-widest uppercase text-primary-500 font-bold">{t('landing.why.payload')}</span>
+                          <span className="tracking-widest uppercase text-primary-400 font-bold">{t('landing.why.payload')}</span>
                           <span className="font-black text-red-500">{t('landing.why.unencrypted')}</span>
                         </div>
                         <div className="space-y-3 text-base">
@@ -417,7 +417,7 @@ export default function LandingPage() {
                       </div>
                       <div className="space-y-4 rounded-3xl border border-accent-500/20 bg-accent-500/5 p-8">
                         <div className="flex justify-between border-b border-accent-500/10 pb-4">
-                          <span className="tracking-widest uppercase text-primary-500 font-bold">{t('landing.why.state')}</span>
+                          <span className="tracking-widest uppercase text-primary-400 font-bold">{t('landing.why.state')}</span>
                           <span className="font-black text-accent-400">{t('landing.why.encryptedRecord')}</span>
                         </div>
                         <div className="space-y-3 text-base">
@@ -444,9 +444,9 @@ export default function LandingPage() {
       <section id="comparison" className="mx-auto max-w-7xl px-4 md:px-6 py-20 md:py-32">
         <div className="mb-16 md:mb-24 text-center">
           <h2 className="mb-6 text-5xl font-black uppercase italic tracking-tighter md:text-8xl">
-            {t('landing.features.thePrefix')} <span className="text-accent-500 drop-shadow-[0_0_20px_rgba(245,158,11,0.2)]">{t('landing.features.unfair')}</span> {t('landing.features.advantage')}
+            {t('landing.features.thePrefix')} <span className="text-accent-500 drop-shadow-[0_0_20px_rgba(56,178,168,0.2)]">{t('landing.features.unfair')}</span> {t('landing.features.advantage')}
           </h2>
-          <p className="text-lg md:text-xl font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary-500">
+          <p className="text-lg md:text-xl font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-primary-400">
             {t('landing.features.unfairAdvantageSubtitle')}
           </p>
         </div>
@@ -459,7 +459,7 @@ export default function LandingPage() {
             <table className="w-full min-w-[700px] md:min-w-[800px] text-left border-collapse">
               <thead>
                 <tr className="bg-white/[0.03]">
-                  <th className="px-6 md:px-10 py-8 md:py-10 font-black uppercase tracking-widest text-primary-500 text-xs md:text-sm">{t('landing.features.featureColumn')}</th>
+                  <th className="px-6 md:px-10 py-8 md:py-10 font-black uppercase tracking-widest text-primary-400 text-xs md:text-sm">{t('landing.features.featureColumn')}</th>
                   <th className="px-6 md:px-10 py-8 md:py-10 font-black uppercase tracking-widest text-primary-400 text-xs md:text-sm">
                     {t('landing.features.legacyBanks')}
                   </th>
@@ -482,7 +482,7 @@ export default function LandingPage() {
                 ].map((row, i) => (
                   <tr key={i} className="transition-all hover:bg-white/[0.02] group">
                     <td className="px-6 md:px-10 py-8 md:py-10 text-primary-300 group-hover:text-white transition-colors">{row.f}</td>
-                    <td className="px-6 md:px-10 py-8 md:py-10 text-primary-500">{row.b}</td>
+                    <td className="px-6 md:px-10 py-8 md:py-10 text-primary-400">{row.b}</td>
                     <td className="px-6 md:px-10 py-8 md:py-10 text-red-500/40 group-hover:text-red-500/60 transition-colors">{row.e}</td>
                     <td className="px-6 md:px-10 py-8 md:py-10 text-accent-400 relative font-black">
                       {row.z}
@@ -498,14 +498,14 @@ export default function LandingPage() {
 
       {/* How it Works Section — 3 steps with UI demos */}
       <section id="how-it-works" className="bg-primary-900/10 py-32 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(245,158,11,0.03),transparent_70%)]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(56,178,168,0.04),transparent_70%)]" />
         
         <div className="mx-auto max-w-7xl px-6 relative">
           <div className="mb-24 text-center">
             <h2 className="mb-6 text-5xl font-black tracking-tighter italic md:text-8xl">
               {t('landing.howItWorks.titlePrefix')} <span className="text-accent-500">{t('landing.howItWorks.titleHighlight')}</span> {t('landing.howItWorks.titleSuffix')}
             </h2>
-            <p className="text-xl font-bold uppercase tracking-[0.3em] text-primary-500">
+            <p className="text-xl font-bold uppercase tracking-[0.3em] text-primary-400">
               {t('landing.howItWorks.subtitle')}
             </p>
           </div>
@@ -628,7 +628,7 @@ export default function LandingPage() {
             <h2 className="mb-6 text-5xl font-black uppercase tracking-tighter italic md:text-8xl">
               {t('landing.features.whatIsPrefix')} <span className="text-accent-500">{t('landing.features.whatIsHighlight')}</span>
             </h2>
-            <p className="text-xl font-bold uppercase tracking-[0.3em] text-primary-500">
+            <p className="text-xl font-bold uppercase tracking-[0.3em] text-primary-400">
               {t('landing.features.whatIsSubtitle')}
             </p>
           </div>
@@ -644,14 +644,14 @@ export default function LandingPage() {
                   <EyeOff className="h-8 w-8 text-accent-500" />
                 </div>
                 <h3 className="mb-4 text-3xl font-black uppercase tracking-tight text-white">{t('landing.features.zkRecordInvoicing')}</h3>
-                <p className="mb-6 text-sm font-bold uppercase tracking-[0.2em] text-primary-500">{t('landing.features.coreTechnology')}</p>
+                <p className="mb-6 text-sm font-bold uppercase tracking-[0.2em] text-primary-400">{t('landing.features.coreTechnology')}</p>
                 <div className="mb-8 h-px bg-gradient-to-r from-primary-800 to-transparent" />
                 <p className="text-xl font-medium leading-relaxed text-primary-300">
                   <span className="mb-2 block text-xs font-black uppercase text-accent-400">{t('landing.features.theBenefit')}</span>
                   {t('landing.features.zkRecordBenefitDesc')}
                 </p>
               </div>
-              <div className="mt-8 p-6 rounded-2xl bg-primary-900/30 border border-white/5 font-mono text-xs text-primary-500">
+              <div className="mt-8 p-6 rounded-2xl bg-primary-900/30 border border-white/5 font-mono text-xs text-primary-400">
                 <span>{t('landing.features.encryptedPayloadExample')}</span>
                 <br />
                 {`{ ciphertext: "0x7f3a...2b1c", iv: "0x1a2b...3c4d" }`}

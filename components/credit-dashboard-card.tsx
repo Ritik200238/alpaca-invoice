@@ -77,7 +77,7 @@ export default function CreditDashboardCard({ metrics, onCollect, isLoading }: C
       <div className="flex items-center gap-5">
         <div className="relative shrink-0">
           <svg width={ringSize} height={ringSize} className="-rotate-90">
-            <circle cx={ringSize / 2} cy={ringSize / 2} r={r} fill="none" stroke="#e7e5e4" strokeWidth={sw} />
+            <circle cx={ringSize / 2} cy={ringSize / 2} r={r} fill="none" stroke="#d9e0e5" strokeWidth={sw} />
             <circle
               cx={ringSize / 2} cy={ringSize / 2} r={r} fill="none"
               stroke={colors.ring} strokeWidth={sw} strokeLinecap="round"

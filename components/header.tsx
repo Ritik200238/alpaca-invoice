@@ -59,7 +59,7 @@ export default function Header() {
   const title = t(keys.titleKey);
 
   return (
-    <header className="sticky top-4 z-30 flex h-14 items-center justify-between rounded-2xl border border-white/60 bg-white/80 px-4 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.35)] backdrop-blur-xl md:top-6 md:h-16 md:px-6">
+    <header className="sticky top-4 z-30 flex h-14 items-center justify-between rounded-2xl border border-primary-200/80 bg-white px-4 shadow-[0_1px_2px_rgba(15,27,34,0.05),0_14px_30px_-22px_rgba(15,27,34,0.28)] md:top-6 md:h-16 md:px-6">
       <div className="flex items-center gap-3">
         <button
           onClick={toggle}

@@ -28,7 +28,7 @@ export default function ReceiptCard({ receipt, explorerTxUrl = null }: ReceiptCa
 
   return (
     <TooltipProvider>
-      <div className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.3)] backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-[0_22px_46px_-24px_rgba(15,23,42,0.35)]">
+      <div className="group relative overflow-hidden rounded-2xl border border-primary-200/80 bg-white shadow-[0_1px_2px_rgba(15,27,34,0.05),0_14px_30px_-22px_rgba(15,27,34,0.26)] transition-all hover:-translate-y-px hover:shadow-[0_1px_2px_rgba(15,27,34,0.06),0_18px_36px_-22px_rgba(15,27,34,0.32)]">
         {/* Left status bar — paid */}
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-success-500" />
 

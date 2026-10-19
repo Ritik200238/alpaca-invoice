@@ -166,13 +166,13 @@ export function TourOverlay({ steps, currentStep, onNext, onPrev, onSkip }: Tour
           left: rect.left,
           width: rect.width,
           height: rect.height,
-          boxShadow: '0 0 0 4px rgba(99,102,241,0.18)',
+          boxShadow: '0 0 0 4px rgba(15,118,110,0.18)',
         }}
       />
 
       {/* Tooltip */}
       <div
-        className="absolute z-[10000] w-80 rounded-2xl border border-white/60 bg-white p-5 shadow-2xl"
+        className="absolute z-[10000] w-80 rounded-2xl border border-primary-200 bg-white p-5 shadow-2xl"
         style={{ ...tooltipStyle, pointerEvents: 'auto' }}
       >
         <button

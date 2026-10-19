@@ -171,12 +171,12 @@ export default function ChatBot() {
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={toggleOpen}
-            className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/30 transition-shadow hover:shadow-xl hover:shadow-amber-500/40"
+            className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-accent-500 to-accent-600 text-white shadow-lg shadow-accent-500/30 transition-shadow hover:shadow-xl hover:shadow-accent-500/40"
             aria-label="Open chat assistant"
           >
             <MessageCircle className="h-6 w-6" />
             {/* Pulse ring */}
-            <span className="absolute inset-0 animate-ping rounded-full bg-amber-400 opacity-20" />
+            <span className="absolute inset-0 animate-ping rounded-full bg-accent-400 opacity-20" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -189,12 +189,12 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-            className="fixed bottom-6 right-6 z-50 flex h-[min(600px,calc(100vh-3rem))] w-[min(420px,calc(100vw-3rem))] flex-col overflow-hidden rounded-2xl border border-primary-200/60 bg-white/95 shadow-2xl shadow-primary-900/10 backdrop-blur-lg"
+            className="fixed bottom-6 right-6 z-50 flex h-[min(600px,calc(100vh-3rem))] w-[min(420px,calc(100vw-3rem))] flex-col overflow-hidden rounded-2xl border border-primary-200/60 bg-white shadow-2xl shadow-primary-900/10"
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-primary-100 bg-gradient-to-r from-primary-800 to-primary-900 px-4 py-3">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-500/90 text-sm font-bold text-white">
+                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-600 text-sm font-bold text-white">
                   P
                 </div>
                 <div>
@@ -226,7 +226,7 @@ export default function ChatBot() {
             <div className="flex-1 overflow-y-auto px-4 py-3">
               {messages.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center gap-4">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-100 text-2xl">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-100 text-2xl">
                     🦙
                   </div>
                   <div className="text-center">
@@ -243,7 +243,7 @@ export default function ChatBot() {
                         key={q}
                         onClick={() => sendMessage(q)}
                         disabled={isLoading}
-                        className="rounded-xl border border-primary-200/70 bg-white px-3 py-2 text-left text-xs text-primary-700 transition-all hover:border-amber-300 hover:bg-amber-50/50 hover:text-amber-800 disabled:opacity-50"
+                        className="rounded-xl border border-primary-200/70 bg-white px-3 py-2 text-left text-xs text-primary-700 transition-all hover:border-accent-300 hover:bg-accent-50/50 hover:text-accent-800 disabled:opacity-50"
                       >
                         {q}
                       </button>
@@ -264,13 +264,13 @@ export default function ChatBot() {
                         className={cn(
                           'max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed',
                           msg.role === 'user'
-                            ? 'rounded-br-md bg-gradient-to-br from-amber-500 to-amber-600 text-white'
+                            ? 'rounded-br-md bg-gradient-to-br from-accent-500 to-accent-600 text-white'
                             : 'rounded-bl-md border border-primary-100 bg-primary-50/60 text-primary-800'
                         )}
                       >
                         {msg.role === 'model' ? (
                           msg.content ? (
-                            <div className="prose prose-sm prose-primary max-w-none [&_pre]:bg-primary-800 [&_pre]:text-primary-100 [&_code]:text-amber-700 [&_a]:text-amber-600 [&_strong]:text-primary-900 [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm [&_p]:my-1.5 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:my-0.5 [&_table]:text-xs">
+                            <div className="prose prose-sm prose-primary max-w-none [&_pre]:bg-primary-800 [&_pre]:text-primary-100 [&_code]:text-accent-700 [&_a]:text-accent-600 [&_strong]:text-primary-900 [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm [&_p]:my-1.5 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:my-0.5 [&_table]:text-xs">
                               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                 {msg.content}
                               </ReactMarkdown>
@@ -307,7 +307,7 @@ export default function ChatBot() {
                 <button
                   type="submit"
                   disabled={!input.trim() || isLoading}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-white transition-all hover:from-amber-600 hover:to-amber-700 disabled:opacity-40 disabled:hover:from-amber-500 disabled:hover:to-amber-600"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 text-white transition-all hover:from-accent-600 hover:to-accent-700 disabled:opacity-40 disabled:hover:from-accent-500 disabled:hover:to-accent-600"
                 >
                   {isLoading ? (
                     <Loader2 className="h-4 w-4 animate-spin" />

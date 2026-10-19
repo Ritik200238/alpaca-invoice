@@ -55,7 +55,7 @@ export default function CreditRadarChart({ dimensions, size = 240 }: CreditRadar
               key={level}
               points={pts.map((p) => `${p.x},${p.y}`).join(' ')}
               fill="none"
-              stroke="#e7e5e4"
+              stroke="#d9e0e5"
               strokeWidth={1}
             />
           );
@@ -70,7 +70,7 @@ export default function CreditRadarChart({ dimensions, size = 240 }: CreditRadar
               y1={center}
               x2={end.x}
               y2={end.y}
-              stroke="#e7e5e4"
+              stroke="#d9e0e5"
               strokeWidth={1}
             />
           );
@@ -78,13 +78,13 @@ export default function CreditRadarChart({ dimensions, size = 240 }: CreditRadar
 
         <polygon
           points={polygonPoints}
-          fill="rgba(245, 158, 11, 0.15)"
-          stroke="#F59E0B"
+          fill="rgba(15, 118, 110, 0.15)"
+          stroke="#0F766E"
           strokeWidth={2}
         />
 
         {dataPoints.map((p, i) => (
-          <circle key={i} cx={p.x} cy={p.y} r={3.5} fill="#D97706" />
+          <circle key={i} cx={p.x} cy={p.y} r={3.5} fill="#0B5F59" />
         ))}
 
         {AXES.map((axis) => {

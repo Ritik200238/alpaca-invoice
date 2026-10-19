@@ -10,47 +10,77 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Palette: warm dark brown (matches mascot illustration)
+        // Palette: cool ink neutrals with a deep teal accent.
+        // Contrast notes (WCAG 2.x): white on accent-500 5.47:1, white on accent-600 7.51:1,
+        // primary-500 on white 5.27:1, accent-400 on primary-900 7.1:1.
 
-        // Primary - dark brown (sidebar, dark surfaces)
+        // Primary - ink neutrals (sidebar, text, borders, surfaces)
         primary: {
-          50: "#FAFAF9",
-          100: "#F5F5F4",
-          200: "#E7E5E4",
-          300: "#D6D3D1",
-          400: "#A8A29E",
-          500: "#78716C",
-          600: "#57534E",
-          700: "#44403C",
-          800: "#292524",  // sidebar background
-          900: "#1C1917",  // deepest tone
-          950: "#0C0A09",
+          50: "#F4F7F8",
+          100: "#E9EEF1",
+          200: "#D9E0E5",
+          300: "#BFC9D0",
+          400: "#86939D",
+          500: "#5F6E78",
+          600: "#4A5862",
+          700: "#36434C",
+          800: "#222D34",
+          900: "#151D22",  // sidebar mid tone
+          950: "#0B1114",  // sidebar / landing base
         },
 
-        // Accent - amber/gold (CTA, primary actions)
+        // Accent - deep teal (CTA, primary actions). 500 carries white text at AA.
         accent: {
-          50: "#FFFBEB",
-          100: "#FEF3C7",
-          200: "#FDE68A",
-          300: "#FCD34D",
-          400: "#FBBF24",
-          500: "#F59E0B",  // main CTA
-          600: "#D97706",
-          700: "#B45309",
-          800: "#92400E",
-          900: "#78350F",
+          50: "#F0FAF9",
+          100: "#D3F0ED",
+          200: "#A6E1DB",
+          300: "#6CCBC2",
+          400: "#38B2A8",
+          500: "#0F766E",  // main CTA
+          600: "#0B5F59",
+          700: "#094B47",
+          800: "#073A37",
+          900: "#052B29",
         },
 
-        // Success - green
+        // Success - true green, kept apart from the teal accent so "paid" never reads as "action"
         success: {
-          50: "#ECFDF5",
-          100: "#D1FAE5",
-          200: "#A7F3D0",
-          300: "#6EE7B7",
-          400: "#34D399",
-          500: "#10B981",
-          600: "#059669",
-          700: "#047857",
+          50: "#F0FAF3",
+          100: "#DDF3E4",
+          200: "#BDE6CB",
+          300: "#8FD3A8",
+          400: "#55BA80",
+          500: "#2C9A5F",
+          600: "#1F804C",
+          700: "#186840",
+        },
+
+        // Re-tinted default palettes so existing emerald-* / purple-* classes follow the new system.
+        // emerald = paid / resolved states (same ramp as success)
+        emerald: {
+          50: "#F0FAF3",
+          100: "#DDF3E4",
+          200: "#BDE6CB",
+          300: "#8FD3A8",
+          400: "#55BA80",
+          500: "#2C9A5F",
+          600: "#1F804C",
+          700: "#186840",
+          800: "#145334",
+          900: "#0F3F28",
+        },
+        // purple = arbiter role; muted plum instead of saturated violet
+        purple: {
+          50: "#F8F5FB",
+          100: "#EFE9F5",
+          200: "#DDD1EA",
+          300: "#C2AED6",
+          400: "#9A82B5",
+          500: "#7D63A0",
+          600: "#6B4C8A",
+          700: "#4D3868",
+          800: "#3E2D55",
+          900: "#35234A",
         },
 
         // Warning - amber
@@ -89,18 +119,19 @@ const config: Config = {
           700: "#1D4ED8",
         },
 
-        // Alpaca accent set (selective use)
+        // Form-control set (inputs, selects, checkboxes). 300 is the control border and
+        // meets 3:1 against the field fill; 400 is placeholder text at 4.7:1.
         alpaca: {
-          50: "#FFFEF9",
-          100: "#FDF8F3",
-          200: "#F5EBE0",
-          300: "#E8D5C4",
-          400: "#D4B896",
-          500: "#C4A574",
-          600: "#A68B5B",
-          700: "#8B7355",
-          800: "#6B5A47",
-          900: "#4A3F35",
+          50: "#FBFCFD",
+          100: "#F1F5F7",
+          200: "#E1E8EC",
+          300: "#8794A0",
+          400: "#66737D",
+          500: "#566570",
+          600: "#46535D",
+          700: "#36424B",
+          800: "#26313A",
+          900: "#181F25",
         },
 
         // shadcn/ui 主题 tokens
@@ -127,21 +158,27 @@ const config: Config = {
         ring: "hsl(var(--ring))",
       },
       fontFamily: {
-        sans: ["DM Sans", "Inter", "SF Pro Display", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "SF Mono", "monospace"],
+        // Latin: IBM Plex Sans. CJK glyphs fall through to the platform's Japanese / Chinese UI fonts.
+        sans: [
+          "IBM Plex Sans", "system-ui", "-apple-system", "Segoe UI",
+          "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo",
+          "PingFang SC", "Microsoft YaHei UI", "Noto Sans CJK JP", "Noto Sans CJK SC", "sans-serif",
+        ],
+        mono: ["IBM Plex Mono", "JetBrains Mono", "SF Mono", "ui-monospace", "monospace"],
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        xl: "12px",
-        "2xl": "16px",
+        xl: "10px",
+        "2xl": "14px",
       },
+      // Ink-tinted shadows (cool, low alpha) instead of neutral black
       boxShadow: {
-        'sm': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1)',
-        'lg': '0 10px 15px -3px rgb(0 0 0 / 0.1)',
-        'xl': '0 20px 25px -5px rgb(0 0 0 / 0.1)',
+        'sm': '0 1px 2px 0 rgb(15 27 34 / 0.06)',
+        'md': '0 4px 8px -2px rgb(15 27 34 / 0.09), 0 2px 4px -2px rgb(15 27 34 / 0.05)',
+        'lg': '0 10px 18px -4px rgb(15 27 34 / 0.10), 0 4px 8px -4px rgb(15 27 34 / 0.05)',
+        'xl': '0 20px 28px -6px rgb(15 27 34 / 0.12), 0 8px 12px -6px rgb(15 27 34 / 0.06)',
       },
       keyframes: {
         "accordion-down": {

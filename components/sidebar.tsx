@@ -108,7 +108,7 @@ export default function Sidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1 px-3 py-6">
-          <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-primary-500">
+          <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-primary-400">
             Menu
           </div>
           {navItems.map((item) => {
@@ -137,7 +137,7 @@ export default function Sidebar() {
                 className={cn(
                   'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all cursor-pointer',
                   isActive
-                    ? 'bg-gradient-to-r from-accent-500/90 to-accent-400/80 text-white shadow-lg shadow-accent-500/25'
+                    ? 'bg-gradient-to-r from-accent-600 to-accent-500/90 text-white shadow-lg shadow-accent-900/30'
                     : 'text-primary-300 hover:bg-white/5 hover:text-white'
                 )}
               >
@@ -160,7 +160,7 @@ export default function Sidebar() {
               <button
                 type="button"
                 onClick={() => setHelpVisible(false)}
-                className="absolute right-2 top-2 rounded-lg p-1 text-primary-500 transition-colors hover:bg-white/10 hover:text-white"
+                className="absolute right-2 top-2 rounded-lg p-1 text-primary-400 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <X className="h-3.5 w-3.5" />
               </button>

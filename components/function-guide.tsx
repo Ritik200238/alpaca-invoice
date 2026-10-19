@@ -89,7 +89,7 @@ export default function FunctionGuide() {
         {functions.map((fn) => (
           <div
             key={fn.name}
-            className="rounded-xl bg-white border border-amber-200 p-5 hover:border-amber-400 transition-colors"
+            className="rounded-xl bg-white border border-accent-200 p-5 hover:border-accent-400 transition-colors"
           >
             <div className="flex items-start gap-3 mb-3">
               <div className="text-2xl">{fn.icon}</div>
@@ -98,7 +98,7 @@ export default function FunctionGuide() {
                   <code className="text-sm font-mono font-semibold text-slate-900">
                     {fn.name}
                   </code>
-                  <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded">
+                  <span className="text-xs bg-accent-100 text-accent-700 px-2 py-0.5 rounded">
                     {fn.role}
                   </span>
                 </div>
@@ -112,7 +112,7 @@ export default function FunctionGuide() {
                 <ul className="space-y-1 pl-3">
                   {fn.params.map((p) => (
                     <li key={p.name} className="text-slate-600">
-                      <code className="text-amber-700">{p.name}</code>: {p.desc}
+                      <code className="text-accent-700">{p.name}</code>: {p.desc}
                     </li>
                   ))}
                 </ul>
@@ -124,8 +124,8 @@ export default function FunctionGuide() {
               </div>
 
               {fn.note && (
-                <div className="bg-amber-50 border border-amber-200 rounded p-2 mt-2">
-                  <span className="font-semibold text-amber-700">{t('functionGuide.noteLabel')} </span>
+                <div className="bg-accent-50 border border-accent-200 rounded p-2 mt-2">
+                  <span className="font-semibold text-accent-700">{t('functionGuide.noteLabel')} </span>
                   <span className="text-slate-600">{fn.note}</span>
                 </div>
               )}

@@ -65,7 +65,7 @@ export default function WalletConnectButtonV2() {
   }
 
   return (
-    <div className="inline-flex items-center gap-3 rounded-2xl border border-white/60 bg-white/80 px-4 py-2.5 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.25)] backdrop-blur" data-tour="wallet-connect">
+    <div className="inline-flex items-center gap-3 rounded-2xl border border-primary-200/80 bg-white px-4 py-2.5 shadow-[0_1px_2px_rgba(15,27,34,0.05),0_14px_30px_-22px_rgba(15,27,34,0.24)]" data-tour="wallet-connect">
       {/* Connection Status */}
       <div className="flex items-center gap-2.5">
         <span className="relative flex h-2 w-2">

@@ -101,9 +101,9 @@ export function DatePicker({
             }}
             styles={{
               root: {
-                '--rdp-accent-color': 'var(--color-accent-500, #f59e0b)',
-                '--rdp-accent-background-color': 'var(--color-accent-50, #fffbeb)',
-                '--rdp-today-color': 'var(--color-accent-600, #d97706)',
+                '--rdp-accent-color': 'var(--color-accent-500, #0f766e)',
+                '--rdp-accent-background-color': 'var(--color-accent-50, #f0faf9)',
+                '--rdp-today-color': 'var(--color-accent-600, #0b5f59)',
                 '--rdp-day-height': '36px',
                 '--rdp-day-width': '36px',
                 '--rdp-day_button-height': '34px',

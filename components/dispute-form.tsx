@@ -124,7 +124,7 @@ export default function DisputeForm({ invoice, arbiter, onSubmit, onCancel, txPr
         <button
           type="submit"
           disabled={isSubmitting || !reason.trim()}
-          className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 disabled:opacity-50"
+          className="rounded-lg bg-accent-600 px-4 py-2 text-sm font-medium text-white hover:bg-accent-700 disabled:opacity-50"
         >
           {isSubmitting ? t('dispute.submitting') : t('dispute.raiseDispute')}
         </button>

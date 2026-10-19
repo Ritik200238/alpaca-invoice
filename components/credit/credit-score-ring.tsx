@@ -33,7 +33,7 @@ export default function CreditScoreRing({ score, grade, size = 180 }: CreditScor
           cy={center}
           r={radius}
           fill="none"
-          stroke="#e7e5e4"
+          stroke="#d9e0e5"
           strokeWidth={strokeWidth}
         />
         <circle

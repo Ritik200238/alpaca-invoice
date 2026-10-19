@@ -45,7 +45,7 @@ export default function AuditCenterV3() {
           type="button"
           onClick={handleUnlock}
           disabled={isRequestingAuth}
-          className="mt-2 rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-700 disabled:opacity-60"
+          className="mt-2 rounded-lg bg-accent-600 px-4 py-2 text-sm font-semibold text-white hover:bg-accent-700 disabled:opacity-60"
         >
           {isRequestingAuth ? t('audit.center.authorizing') : t('wallet.unlock')}
         </button>
