@@ -20,6 +20,7 @@ terms: the chain holds commitments to them, and the parties hold the openings.
 | **Interface** | Next.js, restyled; not yet connected to the Midnight contract |
 | **Next** | escrow, disputes, the stablecoin payment path, a credit proof that counts only real settled invoices, and the interface through the Lace wallet |
 | **Video** | [`docs/inkan-demo.mp4`](docs/inkan-demo.mp4), 2 min 49 s |
+| **Deck** | [`docs/inkan-deck.pdf`](docs/inkan-deck.pdf), 12 slides; built from the same evidence files by `python docs/deck/build.py` |
 
 ## What the chain can and cannot see
 
