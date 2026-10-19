@@ -1,0 +1,16 @@
+{
+  "program": "zk_invoice_v4_1.aleo",
+  "version": "0.0.1",
+  "description": "Wave 4.1: Arbiter Resolution — arbiter can resolve escrows without timeout restriction",
+  "license": "MIT",
+  "leo": "3.5.0",
+  "dependencies": [
+    {
+      "name": "credits.aleo",
+      "location": "network",
+      "path": null,
+      "edition": null
+    }
+  ],
+  "dev_dependencies": null
+}

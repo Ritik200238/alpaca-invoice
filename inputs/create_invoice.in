@@ -1,0 +1,6 @@
+# Test run values (buyer can be same wallet for local simulation)
+buyer: aleo1n0gx6ehedlevfx2xtasc9l22vy4mkfwu0r2he6rdmm9n7hfuq5fq4d8r8u
+amount: 1000000u64
+due_date: 1735689600u32
+invoice_hash: 123456789field
+nonce: 987654321field

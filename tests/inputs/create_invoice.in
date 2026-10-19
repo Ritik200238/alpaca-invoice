@@ -1,0 +1,102 @@
+// Test inputs for create_invoice function
+
+// Test Case 1: Normal invoice creation
+[create_invoice_normal]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 99999field;
+
+// Test Case 2: Small amount invoice
+[create_invoice_small_amount]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 11111field;
+
+// Test Case 3: Large amount invoice
+[create_invoice_large_amount]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000000000000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 22222field;
+
+// Test Case 4: Different buyer
+[create_invoice_different_buyer]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj3hg5c;
+amount: u64 = 1000000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 33333field;
+
+// Test Case 5: Far future due date
+[create_invoice_future_due_date]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000000u64;
+due_date: u32 = 2000000000u32;
+invoice_hash: field = 123456789field;
+nonce: field = 44444field;
+
+// Test Case 6: Different invoice hash
+[create_invoice_different_hash]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 987654321field;
+nonce: field = 55555field;
+
+// Test Case 7: Sequential nonces
+[create_invoice_seq_nonce_1]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 1field;
+
+[create_invoice_seq_nonce_2]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 2field;
+
+// Test Case 8: Maximum u64 amount
+[create_invoice_max_amount]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 18446744073709551615u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 66666field;
+
+// Test Case 9: Minimum valid amount
+[create_invoice_min_amount]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 123456789field;
+nonce: field = 77777field;
+
+// Test Case 10: Multiple invoices with different parameters
+[create_invoice_batch_1]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 1000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 111field;
+nonce: field = 1001field;
+
+[create_invoice_batch_2]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 2000u64;
+due_date: u32 = 1735776000u32;
+invoice_hash: field = 222field;
+nonce: field = 1002field;
+
+[create_invoice_batch_3]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+amount: u64 = 3000u64;
+due_date: u32 = 1735862400u32;
+invoice_hash: field = 333field;
+nonce: field = 1003field;

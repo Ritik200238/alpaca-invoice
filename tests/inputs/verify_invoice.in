@@ -1,0 +1,61 @@
+// Test inputs for verify_invoice function
+
+// Test Case 1: Matching hash verification
+[verify_invoice_match]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+expected_hash: field = 123456789field;
+
+// Test Case 2: Mismatched hash verification
+[verify_invoice_mismatch]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+expected_hash: field = 987654321field;
+
+// Test Case 3: Verify with different hash
+[verify_invoice_different_hash]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 9876543210field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 2000000u64,
+    invoice_hash: 111111111field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+expected_hash: field = 111111111field;
+
+// Test Case 4: Verify paid invoice
+[verify_invoice_paid_status]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+expected_hash: field = 123456789field;

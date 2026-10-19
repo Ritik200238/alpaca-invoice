@@ -1,0 +1,16 @@
+{
+  "program": "zk_invoice_v4_2.aleo",
+  "version": "0.0.1",
+  "description": "Wave 4.2: ESCROWED-only Dispute + Arbiter Resolution",
+  "license": "MIT",
+  "leo": "3.5.0",
+  "dependencies": [
+    {
+      "name": "credits.aleo",
+      "location": "network",
+      "path": null,
+      "edition": null
+    }
+  ],
+  "dev_dependencies": null
+}

@@ -1,0 +1,11 @@
+# Inputs for compute_invoice_hash utility
+seller: aleo1n0gx6ehedlevfx2xtasc9l22vy4mkfwu0r2he6rdmm9n7hfuq5fq4d8r8u
+buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc
+amount: 1000000u64
+tax_amount: 100000u64
+due_date: 1735689600u32
+nonce: 99999field
+order_id: 0field
+currency: 840field
+items_hash: 11111field
+memo_hash: 0field

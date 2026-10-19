@@ -1,0 +1,18 @@
+# Inputs from latest create_invoice run (seller=self, buyer=dev key)
+invoice: {
+    owner: aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px.private,
+    invoice_id: 5112945300564589765318854142011730650036690200082245827724152343746309741601field.private,
+    seller: aleo1n0gx6ehedlevfx2xtasc9l22vy4mkfwu0r2he6rdmm9n7hfuq5fq4d8r8u.private,
+    buyer: aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px.private,
+    amount: 1000000u64.private,
+    invoice_hash: 123456789field.private,
+    due_date: 1735689600u32.private,
+    created_at: 0u32.private,
+    _nonce: 230850750235632605370556773170754722840504323101774765196763203856057203393group.public,
+    _version: 1u8.public
+}
+payment: {
+    owner: aleo1rhgdu77hgyqd3xjj8ucu3jj9r2krwz6mnzyd80gncr5fxcwlh5rsvzp9px.private,
+    microcredits: 2000000u64.private
+}
+payment_nonce: 111222333field

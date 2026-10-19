@@ -1,0 +1,1671 @@
+{
+  "program": "zk_invoice_v3_3.aleo",
+  "structs": [
+    {
+      "path": [
+        "FieldCommitments"
+      ],
+      "fields": [
+        {
+          "name": "amount",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "tax_amount",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "due_date",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "buyer",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "seller",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "currency",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "items_hash",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "memo_hash",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "order_id",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "tax_tag",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "jct_registration",
+          "ty": {
+            "Primitive": "Field"
+          }
+        }
+      ]
+    },
+    {
+      "path": [
+        "AuditAuthorization"
+      ],
+      "fields": [
+        {
+          "name": "audit_key_hash",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "scopes_bitmask",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          }
+        },
+        {
+          "name": "expires_at",
+          "ty": {
+            "Primitive": {
+              "UInt": "U32"
+            }
+          }
+        },
+        {
+          "name": "issuer",
+          "ty": {
+            "Primitive": "Address"
+          }
+        }
+      ]
+    },
+    {
+      "path": [
+        "TaxGroup"
+      ],
+      "fields": [
+        {
+          "name": "rate_bps",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          }
+        },
+        {
+          "name": "net_sum",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          }
+        },
+        {
+          "name": "tax_sum",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": [
+        "TaxGroups"
+      ],
+      "fields": [
+        {
+          "name": "group_a",
+          "ty": {
+            "Struct": {
+              "path": [
+                "TaxGroup"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          }
+        },
+        {
+          "name": "group_b",
+          "ty": {
+            "Struct": {
+              "path": [
+                "TaxGroup"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": [
+        "CreateInvoiceJct"
+      ],
+      "fields": [
+        {
+          "name": "tax_groups",
+          "ty": {
+            "Struct": {
+              "path": [
+                "TaxGroups"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          }
+        },
+        {
+          "name": "tax_tag",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "total_amount",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          }
+        },
+        {
+          "name": "jct_registration",
+          "ty": {
+            "Primitive": "Field"
+          }
+        },
+        {
+          "name": "currency_flag",
+          "ty": {
+            "Primitive": {
+              "UInt": "U8"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "path": [
+        "InvoiceRecord"
+      ],
+      "fields": [
+        {
+          "name": "owner",
+          "ty": {
+            "Primitive": "Address"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "invoice_id",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "seller",
+          "ty": {
+            "Primitive": "Address"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "buyer",
+          "ty": {
+            "Primitive": "Address"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "amount",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "tax_amount",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "invoice_hash",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "due_date",
+          "ty": {
+            "Primitive": {
+              "UInt": "U32"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "created_at",
+          "ty": {
+            "Primitive": {
+              "UInt": "U32"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "status",
+          "ty": {
+            "Primitive": {
+              "UInt": "U8"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "order_id",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "currency",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "items_hash",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "memo_hash",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "tax_tag",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "jct_registration",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "total_amount",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "currency_flag",
+          "ty": {
+            "Primitive": {
+              "UInt": "U8"
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "path": [
+        "PaymentRecord"
+      ],
+      "fields": [
+        {
+          "name": "owner",
+          "ty": {
+            "Primitive": "Address"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "payment_id",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "invoice_id",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "payer",
+          "ty": {
+            "Primitive": "Address"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "payee",
+          "ty": {
+            "Primitive": "Address"
+          },
+          "mode": "None"
+        },
+        {
+          "name": "amount",
+          "ty": {
+            "Primitive": {
+              "UInt": "U64"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "paid_at",
+          "ty": {
+            "Primitive": {
+              "UInt": "U32"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "settlement_anchor",
+          "ty": {
+            "Primitive": "Field"
+          },
+          "mode": "None"
+        }
+      ]
+    }
+  ],
+  "mappings": [
+    {
+      "name": "invoice_registry",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "invoice_status",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": {
+          "UInt": "U8"
+        }
+      }
+    },
+    {
+      "name": "invoice_count",
+      "key": {
+        "Primitive": "Address"
+      },
+      "value": {
+        "Primitive": {
+          "UInt": "U64"
+        }
+      }
+    },
+    {
+      "name": "invoice_commitment",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "invoice_field_commitments",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Struct": {
+          "path": [
+            "FieldCommitments"
+          ],
+          "program": "zk_invoice_v3_3"
+        }
+      }
+    },
+    {
+      "name": "invoice_rules_result",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "audit_authorization",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Struct": {
+          "path": [
+            "AuditAuthorization"
+          ],
+          "program": "zk_invoice_v3_3"
+        }
+      }
+    },
+    {
+      "name": "audit_counter",
+      "key": {
+        "Primitive": "Address"
+      },
+      "value": {
+        "Primitive": {
+          "UInt": "U64"
+        }
+      }
+    },
+    {
+      "name": "invoice_tax_tag",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "invoice_jct_reg",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "payment_commitments",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "getter_commitment_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "getter_field_commitments_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Struct": {
+          "path": [
+            "FieldCommitments"
+          ],
+          "program": "zk_invoice_v3_3"
+        }
+      }
+    },
+    {
+      "name": "getter_rules_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "getter_auth_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Struct": {
+          "path": [
+            "AuditAuthorization"
+          ],
+          "program": "zk_invoice_v3_3"
+        }
+      }
+    },
+    {
+      "name": "getter_counter_cache",
+      "key": {
+        "Primitive": "Address"
+      },
+      "value": {
+        "Primitive": {
+          "UInt": "U64"
+        }
+      }
+    },
+    {
+      "name": "getter_tax_tag_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "getter_jct_reg_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "getter_payment_commitment_cache",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Field"
+      }
+    },
+    {
+      "name": "invoice_arbiter",
+      "key": {
+        "Primitive": "Field"
+      },
+      "value": {
+        "Primitive": "Address"
+      }
+    }
+  ],
+  "storage_variables": [],
+  "transitions": [
+    {
+      "name": "create_invoice",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "buyer",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "tax_amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "due_date",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "invoice_hash",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "nonce",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "current_time",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "order_id",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "currency",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "items_hash",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "memo_hash",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "line_items_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "expected_total",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "tax_rate_bps",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "jct",
+          "ty": {
+            "Plaintext": {
+              "Struct": {
+                "path": [
+                  "CreateInvoiceJct"
+                ],
+                "program": "zk_invoice_v3_3"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "arbiter",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "pay_invoice_credits_private",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "pay_record",
+          "ty": {
+            "Record": {
+              "path": [
+                "credits"
+              ],
+              "program": "credits"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "invoice",
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "payment_nonce",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "paid_at",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "credits"
+              ],
+              "program": "credits"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "credits"
+              ],
+              "program": "credits"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "PaymentRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "pay_invoice_usdcx",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "invoice",
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "payment_nonce",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "paid_at",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "PaymentRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "cancel_invoice",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "invoice",
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "set_audit_authorization",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "invoice",
+          "ty": {
+            "Record": {
+              "path": [
+                "InvoiceRecord"
+              ],
+              "program": "zk_invoice_v3_3"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "audit_key_hash",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "scopes_bitmask",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "expires_at",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "current_time",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "compute_invoice_id",
+      "is_async": false,
+      "inputs": [
+        {
+          "name": "seller",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "buyer",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "due_date",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "nonce",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "compute_invoice_hash",
+      "is_async": false,
+      "inputs": [
+        {
+          "name": "seller",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "buyer",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "tax_amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "due_date",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U32"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "nonce",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "order_id",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "currency",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "items_hash",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "memo_hash",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "compute_tax_tag_export",
+      "is_async": false,
+      "inputs": [
+        {
+          "name": "tax_groups",
+          "ty": {
+            "Plaintext": {
+              "Struct": {
+                "path": [
+                  "TaxGroups"
+                ],
+                "program": "zk_invoice_v3_3"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "get_caller",
+      "is_async": false,
+      "inputs": [],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Address"
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "make_jct_non_jct",
+      "is_async": false,
+      "inputs": [
+        {
+          "name": "total_amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "currency_flag",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U8"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Struct": {
+                "path": [
+                  "CreateInvoiceJct"
+                ],
+                "program": "zk_invoice_v3_3"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "make_jct_jct",
+      "is_async": false,
+      "inputs": [
+        {
+          "name": "ga_rate_bps",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "ga_net_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "ga_tax_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "gb_rate_bps",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "gb_net_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "gb_tax_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "tax_tag",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "total_amount",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "jct_reg",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "currency_flag",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U8"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Struct": {
+                "path": [
+                  "CreateInvoiceJct"
+                ],
+                "program": "zk_invoice_v3_3"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "compute_tax_tag_for_test",
+      "is_async": false,
+      "inputs": [
+        {
+          "name": "ga_rate_bps",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "ga_net_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "ga_tax_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "gb_rate_bps",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "gb_net_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        },
+        {
+          "name": "gb_tax_sum",
+          "ty": {
+            "Plaintext": {
+              "Primitive": {
+                "UInt": "U64"
+              }
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "get_invoice_tax_tag",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "invoice_id",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "get_invoice_jct_reg",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "invoice_id",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    },
+    {
+      "name": "get_payment_commitment",
+      "is_async": true,
+      "inputs": [
+        {
+          "name": "commitment",
+          "ty": {
+            "Plaintext": {
+              "Primitive": "Field"
+            }
+          },
+          "mode": "None"
+        }
+      ],
+      "outputs": [
+        {
+          "ty": "Future",
+          "mode": "None"
+        }
+      ]
+    }
+  ]
+}

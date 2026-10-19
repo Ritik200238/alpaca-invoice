@@ -1,0 +1,6 @@
+{
+  "program": "zk_credit_v1_1.aleo",
+  "version": "0.0.1",
+  "description": "ZK Credit Proof v1.1 — fixes division-by-zero in verify_claim (safe_total pattern)",
+  "license": "MIT"
+}

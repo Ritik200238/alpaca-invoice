@@ -1,0 +1,185 @@
+// Test inputs for verify_payment function
+
+// Test Case 1: Matching payment and invoice
+[verify_payment_match]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 9999999999field,
+    invoice_id: 1234567890field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 2: Mismatched invoice_id
+[verify_payment_mismatch_invoice_id]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 9999999999field,
+    invoice_id: 1234567890field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 9876543210field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 3: Mismatched amount
+[verify_payment_mismatch_amount]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 9999999999field,
+    invoice_id: 1234567890field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 2000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 4: Mismatched payer/buyer
+[verify_payment_mismatch_payer]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 9999999999field,
+    invoice_id: 1234567890field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj3hg5c,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 5: Mismatched payee/seller
+[verify_payment_mismatch_payee]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 9999999999field,
+    invoice_id: 1234567890field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj3hg5c,
+    amount: 1000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 6: Verify small amount payment
+[verify_payment_small_amount]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 1111111111field,
+    invoice_id: 1111111111field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1111111111field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 7: Verify large amount payment
+[verify_payment_large_amount]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 2222222222field,
+    invoice_id: 2222222222field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1000000000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 2222222222field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 1u8
+};
+
+// Test Case 8: Verify with pending invoice status (edge case)
+[verify_payment_pending_invoice]
+receipt: PaymentRecord = PaymentRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payment_id: 3333333333field,
+    invoice_id: 3333333333field,
+    payer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    payee: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    amount: 1000000u64,
+    paid_at: 1704153600u32
+};
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 3333333333field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};

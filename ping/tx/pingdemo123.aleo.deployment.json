@@ -1,0 +1,92 @@
+{
+  "type": "deploy",
+  "id": "at13tclc52xwyeupvw3e69wj2kwqd64almq4hm2taa9x6lrpqzysuxssjkhd9",
+  "owner": {
+    "address": "aleo1n0gx6ehedlevfx2xtasc9l22vy4mkfwu0r2he6rdmm9n7hfuq5fq4d8r8u",
+    "signature": "sign1f7kx6cfjjzlavjy37zrs4a9sn8uhh9vley8g5zd3y35h7vaqzgpkrn5368n8kk2hgjr5w4st78clrhfrje3vmetuys9eg9xt78wckq3gzfy8wmkqn03djsy5unx249gnfpqv40wqfmet9pyfwskr6a6kq830xghcp02x8sw9h98qujkfts0enafrvqas5tne3g62xecyvcws63r5l2w"
+  },
+  "deployment": {
+    "edition": 0,
+    "program": "program pingdemo123.aleo;\n\nfunction ping:\n    output 1u8 as u8.private;\n\nconstructor:\n    assert.eq edition 0u16;\n",
+    "verifying_keys": [
+      [
+        "ping",
+        [
+          "verifier1qygqqqqqqqqqqqzp9vqqqqqqqqqrx2cqqqqqqqqqep0sqqqqqqqqq4yzqqqqqqqqqqkrkqqqqqqqqqqvqqqqqqqqqqqrdye7feq0llcakvmpu5q37vt3fyfp05vcqcnxp8635nr450lljh8pkuk5gszz4k8r2ktftw2n9xqpa78vmfxdds2cunmtzh2kr4xw2fnu65umg2tauxkd6u7cgvvw4z7p32kwhhr07s9q0f4smugk4d3sqj4chazncagqkqthmfthdqcruv66kstzusje4mvvrscjks5n3m0yrl0svsu43e6c3ms308uextr4sy8qrskx8gzcjannc8uqkxxw2ecs0ckp7zmkupssvaajs9y52t263phll642028fl8luyd25hu2kyqt634tza2eyt595pe4407upy8ner70ap0nhjpagtutuula9cez9fgd2x05njdcdt7k408ayzvl5kxqv47fn72un5lpmqfj6ya87fknu850srkwm5uutrrsmdv2vllz499sujuapw84haj3pa5qagtwq2uqqc8shdpu2kd4azpdnvlvzcwpujurgef3pf84jgpa7rz7j2t4ttf9gr9uu2mfe69j7a39gsj3lxywszdtxl29uj7l0d68jvz6s3d4mmerm7dgpew039fnyhsdzfgwg8spr4pta3s4w6zfm74e6pe06fwa9sq59rhhwy8n5yutrdm0xnfrr6q2q7ulvs2mdrya3fvs5jea2ahrracstj79krmnyzl06wjjvjhu62qp0vx2se8lq6lnax750u74tx462v5fed9ukkpk5gdsadujh6sanwsmm5rfgxlnxllyg6qssh4p9jxqun7c022rt2mj0rcu9yvnz9fytjquy4s7att5jql2tn22dn9p7te6k0ghvsu5k4c605xe9p6m4v0spzjj8afvcp8vvracc0h6eqyf8hx0pd5wr4k7fn7pyawptkk90lh543njcnrr2rgtufaa2p6m2ss3qpc2w45p9x5fejdlcsxyhh0s09ra7ha2h7tcv5tpsn55gg04dmuxkpqasqqqqqqqqqfn020d",
+          "certificate1qyqsqqqqqqqqqq95t82dlf3xpck2vl0cupjp4r6htsfk5syztudrht8u7hvr6ygdszwry33kpgq3jq0l7fevgggtpuqqqdkwy5t"
+        ]
+      ]
+    ],
+    "program_checksum": [
+      "14u8",
+      "254u8",
+      "183u8",
+      "59u8",
+      "116u8",
+      "61u8",
+      "179u8",
+      "40u8",
+      "181u8",
+      "169u8",
+      "129u8",
+      "124u8",
+      "176u8",
+      "84u8",
+      "105u8",
+      "3u8",
+      "23u8",
+      "237u8",
+      "184u8",
+      "222u8",
+      "185u8",
+      "246u8",
+      "170u8",
+      "58u8",
+      "67u8",
+      "20u8",
+      "83u8",
+      "95u8",
+      "59u8",
+      "76u8",
+      "232u8",
+      "177u8"
+    ],
+    "program_owner": "aleo1n0gx6ehedlevfx2xtasc9l22vy4mkfwu0r2he6rdmm9n7hfuq5fq4d8r8u"
+  },
+  "fee": {
+    "transition": {
+      "id": "au1vdhz87y6uplmjauhpv2ku5waeqley7qkyysvwug5s3txkqltecys4nw6my",
+      "program": "credits.aleo",
+      "function": "fee_public",
+      "inputs": [
+        {
+          "type": "public",
+          "id": "5014835792059937700793658220960289480115761880013000232954427612364926701992field",
+          "value": "1889171u64"
+        },
+        {
+          "type": "public",
+          "id": "3770789799680115886359792795572249794882621408144821140531663556678100404187field",
+          "value": "5000000u64"
+        },
+        {
+          "type": "public",
+          "id": "6379119460208741867468013605513954591331228888682917939218444246418782860176field",
+          "value": "2726909665716127039176773386855367588869466874407760512061218395582520903531field"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "future",
+          "id": "2299693757355582710760748391114819104453558849609656843750326813671313949019field",
+          "value": "{\n  program_id: credits.aleo,\n  function_name: fee_public,\n  arguments: [\n    aleo1n0gx6ehedlevfx2xtasc9l22vy4mkfwu0r2he6rdmm9n7hfuq5fq4d8r8u,\n    6889171u64\n  ]\n}"
+        }
+      ],
+      "tpk": "3986118532258505031997940364580131858859955967732295748585891373550017360873group",
+      "tcm": "6837640259012173580585202885277913052205011163939042507600018285625177762804field",
+      "scm": "1841341918454617663220414195288990484675362372027609859899150931447425265516field"
+    },
+    "global_state_root": "sr1gjwefse33yzmzuewc3jfdrt3kruyj4kcl06tr3c28qql8w9k2qzqngxr74",
+    "proof": "proof1qyqsqqqqqqqqqqqpqqqqqqqqqqqvyj5mfwyfk93p63ahacjuney64zrejlvqnh8j3q6l5svqy5xnzk25aedqcufyjlf26qv5d2wdqkvpq95y5y2sz80vvlyny8djrdqucwn6d990npe65rlpylura32ahahewuad9edz462kcrsssgfwkv0qaqvjqpkqv9zsx0vge02amp687vdm5fsw5h2fpm7dphp4j0r9axxjy5v4d24t5y02q52q4hlk2c9x3wq55ut59k5q8syzhxvqekgdjqccjp4atx79hrq4mdd5dmzxtq7e567h3gadjkeh3j0yrc05y4r7605qgr34dpvpezwfrcxysj0rnl3vkgz2tjzg4yz8t353jdhj53324dna608j64e6yg6mc29nq4jnz5sszlvl3esnpjmkfz4l50q39hu0e9zwhxehsk290ln5zh0fdhx82qgvjjyjykdn4y7l2mhjwspr2yr6szpajhcfczdmhucrlhzddhn809lhpzduk2d5gep9lrq62ercec5ul4llgth8tn9wvywuu5edewtgnq8aea94uwfzj5p7jea9h90u4qth3urcq0ughjq5anpk5xmh5lmwacpvq0dw2wudg2gdg7e822rhm2qymcduzeynlscfrlwgvhksx9f9d8gd4mmeyknnmax47katctq34r8g8dtaf8xwm2zv62ncmvu4zssp5j6xp990fhcu569w39kkaj0hnk2976krymednce9w3jaacldryx9z3tj3l2elzvzk2jvls6p3wvcd9gmvqhgjlzeg448zcpzctpz7rqhwwqueha2qmrn7q9yjdjvh0vmjgg4vx8rl6peedg5ygn6gd2nq3djtlr0ey09fg6sy0jp9rgzz5ug6zp4x6an0v5rak936z2pq69sk8k56rzyscpwaw775edzhgc7v0kh54qvcazgph5pk6997z0synq8579p0v94zh0q478qe9axcmqltxtyfz3ds9gs78mf243lgul3xuxsyvk264t9m3kteqd6m5zxdkfd6tredg75mw3rf6n4v68w907ccpfwzucz6w6wc5h7gu70men403e8vf050x52j8qx6sq28zj29vq9pc08m8eypzd09yutw54dlaqa64w5sg8v5lc7tuv5mzk9xlem9m5s4cfhs8et0skv53c4a9dczrjtsgmynwduvjzydkvnzmtnl7vxnlqvqvqqqqqqqqqqqlnqqrl6xdq4xdzvl3fvfvsnqlfla8fm0hsxymphg5mktgv59gyjl6ralndqhy3ur33mqythz7z0sqqd9zlcgffaeng8ry03lf8tzy08zrjvwtezg0d2vklyur6cjcm90wzk6q0duzapyljv9u9n8qhnlyyqqyg4jdqt2t8nve20d88306d2jajlvpcsqj6ur36juat60qzlscrq68f7e2j4f5rsugrh3qx42xg7lx8usk34kq7qrg7znc3cq5prvr8je9f3xzatjzc0gfa74fadpseesyqqndu25p"
+  }
+}

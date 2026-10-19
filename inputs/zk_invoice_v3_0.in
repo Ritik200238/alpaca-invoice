@@ -1,0 +1,83 @@
+// v3 参数清单（Leo 3.4 不会自动读取此文件，仅作参考）
+// 使用方式：按 [transition名] 区块把参数按顺序复制到命令行，例如：
+//   leo run compute_invoice_hash <seller> <buyer> 1000000u64 100000u64 ...
+// 详见 tests/inputs/v3/README.md
+// seller 请替换为 leo run get_caller 输出；invoice_hash / jct 等需按推荐顺序先跑前序 transition 后填入
+
+[compute_invoice_id]
+seller: address = aleo158ppqgwwvz4z8gcxg6la3j83t3zvw6uud09ck3vvp29c7ggh0qgqj93d4t;
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+due_date: u32 = 1735689600u32;
+nonce: field = 99999field;
+
+[compute_invoice_hash]
+seller: address = aleo158ppqgwwvz4z8gcxg6la3j83t3zvw6uud09ck3vvp29c7ggh0qgqj93d4t;
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+tax_amount: u64 = 100000u64;
+due_date: u32 = 1735689600u32;
+nonce: field = 99999field;
+order_id: field = 0field;
+currency: field = 840field;
+items_hash: field = 11111field;
+memo_hash: field = 0field;
+
+[make_jct_non_jct]
+total_amount: u64 = 1100000u64;
+currency_flag: u8 = 0u8;
+
+[compute_tax_tag_for_test]
+ga_rate_bps: u64 = 1000u64;
+ga_net_sum: u64 = 1000000u64;
+ga_tax_sum: u64 = 100000u64;
+gb_rate_bps: u64 = 800u64;
+gb_net_sum: u64 = 0u64;
+gb_tax_sum: u64 = 0u64;
+
+[make_jct_jct]
+ga_rate_bps: u64 = 1000u64;
+ga_net_sum: u64 = 1000000u64;
+ga_tax_sum: u64 = 100000u64;
+gb_rate_bps: u64 = 800u64;
+gb_net_sum: u64 = 0u64;
+gb_tax_sum: u64 = 0u64;
+tax_tag: field = 0field;
+total_amount: u64 = 1100000u64;
+jct_reg: field = 0field;
+currency_flag: u8 = 0u8;
+
+[create_invoice]
+buyer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+tax_amount: u64 = 100000u64;
+due_date: u32 = 1735689600u32;
+invoice_hash: field = 0field;
+nonce: field = 99999field;
+current_time: u32 = 1700000000u32;
+order_id: field = 0field;
+currency: field = 840field;
+items_hash: field = 11111field;
+memo_hash: field = 0field;
+line_items_sum: u64 = 1000000u64;
+expected_total: u64 = 1100000u64;
+tax_rate_bps: u64 = 1000u64;
+jct: CreateInvoiceJct = CreateInvoiceJct {
+    tax_groups: TaxGroups {
+        group_a: TaxGroup { rate_bps: 0u64, net_sum: 0u64, tax_sum: 0u64 },
+        group_b: TaxGroup { rate_bps: 0u64, net_sum: 0u64, tax_sum: 0u64 }
+    },
+    tax_tag: 0field,
+    total_amount: 1100000u64,
+    jct_registration: 0field,
+    currency_flag: 0u8
+};
+
+[get_invoice_tax_tag]
+invoice_id: field = 0field;
+
+[get_invoice_jct_reg]
+invoice_id: field = 0field;
+
+[get_invoice_tx_id]
+settlement_anchor: field = 0field;

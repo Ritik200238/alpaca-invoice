@@ -1,0 +1,6 @@
+[program]
+name = "zk_invoice_v4"
+network = "testnet"
+
+[dependencies]
+"credits.aleo" = "testnet"

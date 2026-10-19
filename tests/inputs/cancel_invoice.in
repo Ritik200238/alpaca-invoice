@@ -1,0 +1,113 @@
+// Test inputs for cancel_invoice function
+
+// Test Case 1: Normal invoice cancellation
+[cancel_invoice_normal]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+
+// Test Case 2: Cancel small amount invoice
+[cancel_invoice_small_amount]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 1111111111field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+
+// Test Case 3: Cancel large amount invoice
+[cancel_invoice_large_amount]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 2222222222field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+
+// Test Case 4: Cancel invoice close to due date
+[cancel_invoice_near_due_date]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 3333333333field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1704153600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+
+// Test Case 5: Cancel invoice with different buyer
+[cancel_invoice_different_buyer]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 4444444444field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj3hg5c,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+
+// Test Case 6: Cancel recently created invoice
+[cancel_invoice_recent]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 5555555555field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704150000u32,
+    status: 0u8
+};
+
+// Test Case 7: Cancel invoice with custom hash
+[cancel_invoice_custom_hash]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 6666666666field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 987654321field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+
+// Test Case 8: Cancel maximum amount invoice
+[cancel_invoice_max_amount]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    invoice_id: 7777777777field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 18446744073709551615u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};

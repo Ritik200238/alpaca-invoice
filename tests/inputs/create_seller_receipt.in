@@ -1,0 +1,80 @@
+// Test inputs for create_seller_receipt function
+
+// Test Case 1: Normal seller receipt creation
+[create_seller_receipt_normal]
+invoice_id: field = 1234567890field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+payment_nonce: field = 88888field;
+
+// Test Case 2: Small amount receipt
+[create_seller_receipt_small_amount]
+invoice_id: field = 1111111111field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1u64;
+payment_nonce: field = 11111field;
+
+// Test Case 3: Large amount receipt
+[create_seller_receipt_large_amount]
+invoice_id: field = 2222222222field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000000000u64;
+payment_nonce: field = 22222field;
+
+// Test Case 4: Different payment nonce 1
+[create_seller_receipt_nonce_1]
+invoice_id: field = 3333333333field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+payment_nonce: field = 1field;
+
+// Test Case 5: Different payment nonce 2
+[create_seller_receipt_nonce_2]
+invoice_id: field = 4444444444field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+payment_nonce: field = 2field;
+
+// Test Case 6: Different buyer
+[create_seller_receipt_different_buyer]
+invoice_id: field = 5555555555field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj3hg5c;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+payment_nonce: field = 33333field;
+
+// Test Case 7: Multiple receipts for same invoice (different nonces)
+[create_seller_receipt_multi_1]
+invoice_id: field = 6666666666field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 500000u64;
+payment_nonce: field = 44444field;
+
+[create_seller_receipt_multi_2]
+invoice_id: field = 6666666666field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 500000u64;
+payment_nonce: field = 55555field;
+
+// Test Case 8: Maximum amount
+[create_seller_receipt_max_amount]
+invoice_id: field = 7777777777field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 18446744073709551615u64;
+payment_nonce: field = 66666field;
+
+// Test Case 9: Matching buyer receipt parameters
+[create_seller_receipt_match_buyer]
+invoice_id: field = 8888888888field;
+payer: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc;
+payee: address = aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc;
+amount: u64 = 1000000u64;
+payment_nonce: field = 77777field;

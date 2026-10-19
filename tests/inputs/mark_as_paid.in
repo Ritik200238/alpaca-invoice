@@ -1,0 +1,90 @@
+// Test inputs for mark_as_paid function
+
+// Test Case 1: Normal payment marking
+[mark_as_paid_normal]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1234567890field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+payment_nonce: field = 88888field;
+
+// Test Case 2: Small amount payment
+[mark_as_paid_small_amount]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 1111111111field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+payment_nonce: field = 11111field;
+
+// Test Case 3: Large amount payment
+[mark_as_paid_large_amount]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 2222222222field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+payment_nonce: field = 22222field;
+
+// Test Case 4: Different payment nonce
+[mark_as_paid_nonce_1]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 3333333333field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+payment_nonce: field = 1field;
+
+[mark_as_paid_nonce_2]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 4444444444field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1735689600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+payment_nonce: field = 2field;
+
+// Test Case 5: Near due date payment
+[mark_as_paid_near_due_date]
+invoice: InvoiceRecord = InvoiceRecord {
+    owner: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    invoice_id: 5555555555field,
+    seller: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc,
+    buyer: aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk9svjc,
+    amount: 1000000u64,
+    invoice_hash: 123456789field,
+    due_date: 1704153600u32,
+    created_at: 1704067200u32,
+    status: 0u8
+};
+payment_nonce: field = 33333field;

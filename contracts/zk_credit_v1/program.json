@@ -1,0 +1,6 @@
+{
+  "program": "zk_credit_v1.aleo",
+  "version": "0.0.1",
+  "description": "ZK Credit Proof — allows users to generate zero-knowledge proofs of payment reliability",
+  "license": "MIT"
+}
