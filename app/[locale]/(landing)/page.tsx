@@ -735,7 +735,7 @@ export default function LandingPage() {
           </div>
           <span className="text-2xl font-black tracking-tighter text-primary-400">ZK-Invoice</span>
         </div>
-        <p>{t('landing.footer.copyright')}</p>
+        <p>{t('landing.footer.tagline')}</p>
       </footer>
     </div>
   );
