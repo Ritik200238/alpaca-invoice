@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "1",
+  "title": "Alpaca Invoice on Midnight Preview",
+  "network": "preview",
+  "startedAt": "2026-10-19T12:25:18.925Z",
+  "updatedAt": "2026-10-19T13:00:22.243Z",
+  "contractAddress": "15efb99ca21bb255b0f12a1de56c0519d3f98e95c4e1e4f341aea8fa0f4ec2a8",
+  "contractExplorers": [
+    {
+      "explorer": "1am",
+      "url": "https://explorer.1am.xyz/contract/15efb99ca21bb255b0f12a1de56c0519d3f98e95c4e1e4f341aea8fa0f4ec2a8?network=preview"
+    }
+  ],
+  "payer": "mn_addr_preview18qurz66lrx8935a2mes3qutsvvadksv0xcfjujrdwqqcgdy0kplqyrg4ln",
+  "indexer": "https://indexer.preview.midnight.network/api/v4/graphql",
+  "contract": {
+    "source": "contracts/midnight/alpaca-invoice/src/alpaca-invoice.compact",
+    "language": "Compact 0.23",
+    "toolchain": "0.31.1"
+  },
+  "steps": [
+    {
+      "step": "deploy",
+      "circuit": "constructor",
+      "txHash": "bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3",
+      "txId": "bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3",
+      "blockHeight": 1364749,
+      "blockTimestamp": "2026-10-19T11:24:36.000Z",
+      "status": "SUCCESS",
+      "effect": "contract live at 15efb99ca21bb255b0f12a1de56c0519d3f98e95c4e1e4f341aea8fa0f4ec2a8; instance salt on the ledger",
+      "explorers": [
+        {
+          "explorer": "Midnight Explorer",
+          "url": "https://preview.midnightexplorer.com/transactions/bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3"
+        },
+        {
+          "explorer": "Subscan",
+          "url": "https://midnight-preview.subscan.io/tx/bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3"
+        },
+        {
+          "explorer": "1am",
+          "url": "https://explorer.1am.xyz/tx/bbaa1cd4869986b5ca192a72b96cb91f171de8398b4e814cd66df16041af00b3?network=preview"
+        }
+      ]
+    },
+    {
+      "step": "create",
+      "circuit": "createInvoice",
+      "txHash": "b3349368d698aebb226fc61ab17aee2a6a775bed3055eb89cf616b88e262eebe",
+      "txId": "008708c378d2923a4c54d20405f10d98cb78d14540a378439f29ef5dbb55442e07",
+      "blockHeight": 1365672,
+      "blockTimestamp": "2026-10-19T12:56:54.000Z",
+      "status": "SucceedEntirely",
+      "effect": "invoice b6ad1138331ca51e… status pending; 11 field commitments, tax tag and registration digest recorded; no amount, tax, total or due date in the served state",
+      "explorers": [
+        {
+          "explorer": "Midnight Explorer",
+          "url": "https://preview.midnightexplorer.com/transactions/b3349368d698aebb226fc61ab17aee2a6a775bed3055eb89cf616b88e262eebe"
+        },
+        {
+          "explorer": "Subscan",
+          "url": "https://midnight-preview.subscan.io/tx/b3349368d698aebb226fc61ab17aee2a6a775bed3055eb89cf616b88e262eebe"
+        },
+        {
+          "explorer": "1am",
+          "url": "https://explorer.1am.xyz/tx/b3349368d698aebb226fc61ab17aee2a6a775bed3055eb89cf616b88e262eebe?network=preview"
+        }
+      ]
+    },
+    {
+      "step": "audit",
+      "circuit": "setAuditAuthorization",
+      "txHash": "d3d77d267860fb509f13ab7261cab621b1de2809770279888086450e87e642c5",
+      "txId": "00000235701e3eab1caed0d004e6177d85cc177f3e748c93d09b5be60022de7cb9",
+      "blockHeight": 1365677,
+      "blockTimestamp": "2026-10-19T12:57:24.000Z",
+      "status": "SucceedEntirely",
+      "effect": "authorization recorded for amount and tax; only the hash of the audit key reaches the chain",
+      "explorers": [
+        {
+          "explorer": "Midnight Explorer",
+          "url": "https://preview.midnightexplorer.com/transactions/d3d77d267860fb509f13ab7261cab621b1de2809770279888086450e87e642c5"
+        },
+        {
+          "explorer": "Subscan",
+          "url": "https://midnight-preview.subscan.io/tx/d3d77d267860fb509f13ab7261cab621b1de2809770279888086450e87e642c5"
+        },
+        {
+          "explorer": "1am",
+          "url": "https://explorer.1am.xyz/tx/d3d77d267860fb509f13ab7261cab621b1de2809770279888086450e87e642c5?network=preview"
+        }
+      ]
+    },
+    {
+      "step": "cancel",
+      "circuit": "cancelInvoice",
+      "txHash": "e322ff0993f8198ccb4fdeecccc083fbac730d42308a4d8a365018a488ec9374",
+      "txId": "0051b2c6456105a4c2f7a9464843223b852bef66d34bcab3edc41bb6075c557103",
+      "blockHeight": 1365704,
+      "blockTimestamp": "2026-10-19T13:00:06.000Z",
+      "status": "SucceedEntirely",
+      "effect": "status pending -> cancelled; seller audit counter 2 -> 1",
+      "explorers": [
+        {
+          "explorer": "Midnight Explorer",
+          "url": "https://preview.midnightexplorer.com/transactions/e322ff0993f8198ccb4fdeecccc083fbac730d42308a4d8a365018a488ec9374"
+        },
+        {
+          "explorer": "Subscan",
+          "url": "https://midnight-preview.subscan.io/tx/e322ff0993f8198ccb4fdeecccc083fbac730d42308a4d8a365018a488ec9374"
+        },
+        {
+          "explorer": "1am",
+          "url": "https://explorer.1am.xyz/tx/e322ff0993f8198ccb4fdeecccc083fbac730d42308a4d8a365018a488ec9374?network=preview"
+        }
+      ]
+    }
+  ],
+  "notRun": [
+    {
+      "step": "pay",
+      "reason": "could not obtain shielded NIGHT: Insufficient funds"
+    }
+  ],
+  "note": "Every effect above was read back through the public indexer after the transaction landed, not taken from the local result of the call. The privacy checks search the state the indexer served for the invoice figures and fail the run if any appears. Both parties are one wallet with two different secrets, so authorisation is tested here and payee binding is not; the in-process suite covers payee binding with distinct keys."
+}

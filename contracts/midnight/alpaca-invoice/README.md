@@ -14,10 +14,10 @@ path an invoice takes from creation to payment, plus the audit authorization.
 
 | Aleo transition | Midnight | State |
 |---|---|---|
-| `create_invoice` | `createInvoice` | built, tested |
-| `pay_invoice_credits_private` | `payInvoiceShielded` | built, tested |
-| `cancel_invoice` | `cancelInvoice` | built, tested |
-| `set_audit_authorization` | `setAuditAuthorization` | built, tested |
+| `create_invoice` | `createInvoice` | built, tested, run on Preview |
+| `pay_invoice_credits_private` | `payInvoiceShielded` | built, tested in process; **not yet run on Preview** (see below) |
+| `cancel_invoice` | `cancelInvoice` | built, tested, run on Preview |
+| `set_audit_authorization` | `setAuditAuthorization` | built, tested, run on Preview |
 | `pay_invoice_usdcx` | `payInvoiceToken` | not built |
 | `escrow_payment_credits`, `confirm_delivery`, `timeout_refund`, `arbiter_resolve` | escrow circuits | not built |
 | `raise_dispute`, `resolve_dispute`, `submit_evidence` | dispute circuits | not built |
@@ -25,9 +25,17 @@ path an invoice takes from creation to payment, plus the audit authorization.
 | `compute_*`, `make_jct_*`, `get_caller` | pure circuits | built |
 | `get_*` and the `getter_*_cache` mappings | none | deleted: they exist only because Aleo cannot read its own state |
 
-`docs/receipts/preview.json` lists every transaction the deploy script ran, with the
-block, three public explorer links and the state change read back through the indexer.
-The interface in `../../app` is not yet connected to Midnight.
+`docs/receipts/preview.json` lists every transaction the deploy script ran (the deploy,
+`createInvoice`, `setAuditAuthorization` and `cancelInvoice`), with the block, three public
+explorer links and the state change read back through the indexer. The interface in
+`../../app` is not yet connected to Midnight.
+
+**The payment has not run on Preview, and why.** A payment moves a shielded coin. The faucet
+pays unshielded NIGHT, and asking the wallet SDK to shield some from the funded wallet failed
+with `Insufficient funds`. The deploy script records that in the receipts file rather than
+skipping the step. The payment is covered in process, where the test reads the forward of the
+coin to the seller off the runtime's Zswap output, but until a wallet holds shielded NIGHT it
+is not evidenced on a public network.
 
 ## What the chain can and cannot see
 
