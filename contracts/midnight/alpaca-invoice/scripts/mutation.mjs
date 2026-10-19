@@ -113,6 +113,12 @@ const MUTANTS = [
   { name: 'cancel: leave the audit counter alone',
     find: '  dropAuditCounter(parties.sellerKey);\n', replace: '' },
   { name: 'cancel: let the audit counter underflow',
+    // Not a hole in the tests. A pending invoice is always counted in its seller's
+    // audit counter and only a cancellation takes it back out, so the count is at
+    // least 1 whenever `cancelInvoice` can run and the `n > 0` guard can never fire.
+    // It is kept because the Aleo program had it and it costs nothing; the mutant
+    // that removes it behaves identically and no test can tell the difference.
+    equivalent: 'unreachable: a pending invoice is always counted, so the counter is at least 1 at cancel',
     find: '  if (n > 0) {\n    auditCounter.insert(key, (n - 1) as Uint<64>);\n  }',
     replace: '  auditCounter.insert(key, (n - 1) as Uint<64>);' },
 
@@ -225,6 +231,7 @@ for (const m of list) {
   if (!verdict) {
     const t = tests();
     verdict = t.error?.code === 'ETIMEDOUT' ? 'timeout' : t.status === 0 ? 'SURVIVED' : 'killed';
+    if (verdict === 'SURVIVED' && m.equivalent) verdict = 'equivalent';
   }
   copyFileSync(backups.get(file), file);
   results.push({ name: m.name, verdict });
@@ -236,12 +243,19 @@ restoreAll();
 const final = compile();
 if (!final.ok) { console.error('final recompile failed\n' + final.out); process.exit(3); }
 
-const survived = results.filter((r) => r.verdict !== 'killed' && r.verdict !== 'timeout');
+const survived = results.filter((r) => !['killed', 'timeout', 'equivalent'].includes(r.verdict));
 const timeouts = results.filter((r) => r.verdict === 'timeout');
+const equivalents = results.filter((r) => r.verdict === 'equivalent');
+const caught = results.length - survived.length - equivalents.length;
 console.log(
-  `\n${results.length - survived.length} of ${results.length} mutants caught` +
-    (timeouts.length > 0 ? ` (${timeouts.length} by timeout)` : ''),
+  `\n${caught} of ${results.length - equivalents.length} mutants caught` +
+    (timeouts.length > 0 ? ` (${timeouts.length} by timeout)` : '') +
+    (equivalents.length > 0 ? `; ${equivalents.length} equivalent, not counted` : ''),
 );
+for (const q of equivalents) {
+  const why = MUTANTS.find((x) => x.name === q.name)?.equivalent;
+  console.log(`  equivalent: ${q.name} -- ${why}`);
+}
 if (survived.length > 0) {
   console.log('Not killed:');
   for (const s of survived) console.log(`  ${s.verdict}: ${s.name}`);
