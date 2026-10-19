@@ -1,0 +1,68 @@
+<!doctype html><html lang='en'><meta charset='utf-8'><title>Inkan deck 11</title><style>
+@font-face { font-family: 'Instrument'; src: url('../../video/fonts/InstrumentSans.ttf'); font-weight: 400 700; }
+@page { size: 1920px 1080px; margin: 0; }
+:root {
+  --ink: #0d1424; --ink2: #141c30; --line: #2a3553; --text: #eef1f8; --dim: #9aa6c4;
+  --accent: #e9b44c; --ok: #5ccf9a; --bad: #ef6b6b; --blue: #7aa2ff; --seal: #c8372d; --paper: #f3e6d0;
+}
+* { box-sizing: border-box; margin: 0; }
+html, body { background: var(--ink); }
+body { color: var(--text); font-family: 'Instrument', 'Segoe UI', sans-serif;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; background: var(--ink); page-break-after: always; break-after: page; }
+.slide:last-child { page-break-after: auto; break-after: auto; }
+.grid { position: absolute; inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 96px 96px; opacity: .22; }
+.frame { position: absolute; inset: 0; padding: 150px 150px 120px; display: flex; flex-direction: column; justify-content: center; }
+.brand { position: absolute; top: 52px; left: 150px; display: flex; align-items: center; gap: 16px;
+  font-size: 24px; letter-spacing: .12em; color: var(--dim); text-transform: uppercase; font-weight: 600; }
+.brand b { color: var(--accent); }
+.mini { width: 38px; height: 38px; border-radius: 8px; background: var(--seal); display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 0 3px var(--seal), inset 0 0 0 5px var(--paper); transform: rotate(-6deg); }
+.mini span { font-family: 'Yu Mincho', 'MS Mincho', serif; font-weight: 700; font-size: 22px; color: var(--paper); line-height: 1; letter-spacing: 0; }
+.num { position: absolute; top: 56px; right: 150px; font-size: 22px; color: var(--dim); letter-spacing: .08em; }
+.foot { position: absolute; bottom: 48px; left: 150px; right: 150px; display: flex; justify-content: space-between; font-size: 20px; color: #6f7ba0; }
+.kicker { color: var(--accent); font-size: 25px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; margin-bottom: 22px; }
+h1 { font-size: 112px; line-height: 1.02; font-weight: 700; letter-spacing: -.02em; }
+h2 { font-size: 62px; line-height: 1.1; font-weight: 700; letter-spacing: -.015em; max-width: 1600px; margin-bottom: 40px; }
+p.lead { font-size: 36px; line-height: 1.4; color: var(--dim); max-width: 1450px; }
+p.note { font-size: 27px; line-height: 1.45; color: var(--dim); max-width: 1600px; margin-top: 34px; }
+p.note b { color: var(--text); font-weight: 600; }
+ul { list-style: none; padding: 0; display: grid; gap: 20px; max-width: 1600px; }
+li { font-size: 34px; line-height: 1.34; padding-left: 38px; position: relative; }
+li::before { content: ''; position: absolute; left: 0; top: .52em; width: 13px; height: 13px; background: var(--accent); border-radius: 2px; }
+li b { color: var(--accent); font-weight: 600; }
+.cards { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 26px; max-width: 1620px; }
+.card { background: var(--ink2); border: 1px solid var(--line); border-radius: 14px; padding: 32px 34px; }
+.card h3 { font-size: 24px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--accent); margin-bottom: 16px; }
+.card p { font-size: 28px; line-height: 1.42; color: var(--text); }
+.card .n { font-size: 84px; font-weight: 700; color: var(--accent); letter-spacing: -.02em; line-height: 1; }
+.card .l { font-size: 26px; color: var(--dim); margin-top: 14px; line-height: 1.35; }
+.row { font-size: 30px; line-height: 1.6; }
+.term { background: #070b14; border: 1px solid var(--line); border-radius: 14px; padding: 30px 38px;
+  font-family: Consolas, 'Cascadia Mono', monospace; font-size: 30px; line-height: 1.55; color: #cfd8ee; white-space: pre; max-width: 1620px; }
+.term .c { color: #6f7ba0; } .term .k { color: var(--accent); } .term .ok { color: var(--ok); } .term .bad { color: var(--bad); }
+.tbl { width: 100%; max-width: 1620px; border-collapse: collapse; font-size: 27px; }
+.tbl th { text-align: left; color: var(--dim); font-weight: 500; font-size: 21px; letter-spacing: .08em; text-transform: uppercase; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.tbl td { padding: 15px 16px; border-bottom: 1px solid #1c2640; vertical-align: middle; }
+.tbl td.mono { font-family: Consolas, monospace; color: var(--blue); font-size: 23px; }
+.tbl a { color: var(--blue); text-decoration: none; }
+.pill { display: inline-block; padding: 3px 14px; border-radius: 999px; font-size: 21px; font-weight: 600; }
+.pill.ok { background: #123a2b; color: var(--ok); } .pill.wait { background: #3a2f12; color: var(--accent); }
+.flow { display: flex; align-items: stretch; gap: 20px; max-width: 1620px; }
+.box { background: var(--ink2); border: 1px solid var(--line); border-radius: 14px; padding: 26px 28px; font-size: 31px; line-height: 1.3; flex: 1; text-align: center;
+  display: flex; flex-direction: column; justify-content: center; }
+.box small { display: block; color: var(--dim); font-size: 22px; margin-top: 10px; }
+.arrow { color: var(--accent); font-size: 46px; display: flex; align-items: center; }
+.stack { display: grid; gap: 14px; max-width: 1620px; }
+.layer { display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: center; background: var(--ink2); border: 1px solid var(--line); border-radius: 14px; padding: 22px 30px; }
+.layer .t { font-size: 29px; font-weight: 600; }
+.layer .d { font-size: 25px; color: var(--dim); line-height: 1.4; }
+.layer.wait { border-style: dashed; }
+.seal { width: 260px; height: 260px; border-radius: 52px; background: var(--seal); transform: rotate(-6deg);
+  box-shadow: inset 0 0 0 12px var(--seal), inset 0 0 0 18px var(--paper); display: flex; align-items: center; justify-content: center; }
+.seal span { font-family: 'Yu Mincho', 'MS Mincho', serif; font-weight: 700; font-size: 160px; color: var(--paper); line-height: 1; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; max-width: 1620px; }
+a { color: var(--blue); }
+</style><body><section class='slide'><div class='grid'></div><div class='brand'><div class='mini'><span>印</span></div><span><b>Inkan</b> on Midnight</span></div><div class='num'>11 / 12</div><div class='frame'><div class='kicker'>Who it is for</div><h2>Businesses that must prove their books without publishing them.</h2><div class='cards' style='--cols:3'><div class='card'><h3>Sellers</h3><p>Invoice and get paid on-chain without showing prices or customers to anyone reading the ledger.</p></div><div class='card'><h3>Buyers</h3><p>Pay in the same step that records the payment, with a settlement anchor they can later show an auditor.</p></div><div class='card'><h3>Auditors</h3><p>Check exactly the fields they are shown against commitments the chain has held since the invoice was created.</p></div></div><p class='note'><b>Why Japan first:</b> the qualified-invoice system makes per-rate tax correctness a legal requirement, and that is a rule a proof can check. Later, credit proofs from settled invoices let a seller show a lender a payment record without the invoices behind it. Pricing is not set yet.</p></div><div class='foot'><span>Business</span><span>github.com/Ritik200238/inkan</span></div></section></body></html>
